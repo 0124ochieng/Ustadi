@@ -1,0 +1,70 @@
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   SCROLL ANIMATION BASE
+   ============================================================ */
+
+.animate {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate:nth-child(2) { transition-delay: 0.1s; }
+.animate:nth-child(3) { transition-delay: 0.2s; }
+
+/* ============================================================
+   FAQ STAGGER ENTRANCE
+   ============================================================ */
+
+/* Base hidden state — items start invisible and shifted down */
+.faq-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease,
+              transform 0.5s ease,
+              background 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+/* Revealed by JS when scrolled into view */
+.faq-item.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays — 70ms between each item */
+.faq-item:nth-child(1) { transition-delay: 0s; }
+.faq-item:nth-child(2) { transition-delay: 0.07s; }
+.faq-item:nth-child(3) { transition-delay: 0.14s; }
+.faq-item:nth-child(4) { transition-delay: 0.21s; }
+.faq-item:nth-child(5) { transition-delay: 0.28s; }
+.faq-item:nth-child(6) { transition-delay: 0.35s; }
+.faq-item:nth-child(7) { transition-delay: 0.42s; }
+
+/* After entrance — interactive transforms work from the settled position */
+.faq-item.in-view:hover {
+  transform: translateY(-1px);
+}
+
+.faq-item.in-view.open {
+  transform: translateY(-2px);
+}
