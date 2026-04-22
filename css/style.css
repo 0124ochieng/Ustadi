@@ -535,15 +535,43 @@ textarea {
   justify-content: center;
   width: 44px;
   height: 44px;
-  color: var(--cream);
+  background: transparent;
+  border: none;
   cursor: pointer;
+  padding: 0;
   flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.hamburger i {
-  font-size: 24px;
-  line-height: 1;
+/* Pure CSS three-bar icon — no external script dependency */
+.hamburger-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
   pointer-events: none;
+}
+
+.hamburger-icon span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #fffef4;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Animate to X when menu is open */
+.hamburger.active .hamburger-icon span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger.active .hamburger-icon span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger.active .hamburger-icon span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 /* ============================================================
@@ -597,14 +625,38 @@ textarea {
   justify-content: center;
   width: 44px;
   height: 44px;
-  color: var(--cream);
+  background: transparent;
+  border: none;
   cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.menu-close i {
-  font-size: 24px;
-  line-height: 1;
+/* Pure CSS X icon */
+.close-icon {
+  position: relative;
+  width: 24px;
+  height: 24px;
   pointer-events: none;
+}
+
+.close-icon span {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #fffef4;
+  border-radius: 2px;
+}
+
+.close-icon span:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.close-icon span:nth-child(2) {
+  transform: rotate(-45deg);
 }
 
 /* Nav items */
@@ -696,6 +748,7 @@ textarea {
   object-fit: cover;
   border-radius: 12px;
   display: block;
+  background-color: #0a0f2e;
 }
 
 .hero__cta {

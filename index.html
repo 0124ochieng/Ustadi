@@ -31,6 +31,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
+  <!-- Hero image preload -->
+  <link rel="preload" as="image" href="assets/images/image 1.png">
+
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
@@ -58,9 +61,13 @@
       <!-- Desktop CTA (hidden on mobile) -->
       <a href="#booking-form" class="btn-nav navbar__cta">Book Free Session</a>
 
-      <!-- Hamburger (mobile only) -->
+      <!-- Hamburger (mobile only) — pure CSS, no icon dependency -->
       <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-        <i class="ph ph-list"></i>
+        <div class="hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </button>
 
     </nav>
@@ -74,7 +81,10 @@
         <img src="assets/icons/fonts/white ustadi logo.png" alt="Ustadi Learning" class="navbar__logo-img" width="80" height="28" loading="eager">
       </a>
       <button class="menu-close" aria-label="Close menu">
-        <i class="ph ph-x"></i>
+        <div class="close-icon">
+          <span></span>
+          <span></span>
+        </div>
       </button>
     </div>
 
@@ -113,11 +123,16 @@
         </div>
 
         <div class="hero__image-wrap">
-          <img src="assets/images/image 1.png"
-               alt="Student learning with Ustadi tutor"
-               class="hero__image"
-               width="390" height="260"
-               loading="eager">
+          <picture>
+            <source srcset="assets/images/image1.webp" type="image/webp">
+            <img src="assets/images/image 1.png"
+                 alt="Student learning with Ustadi tutor"
+                 class="hero__image"
+                 width="390" height="260"
+                 loading="eager"
+                 fetchpriority="high"
+                 decoding="async">
+          </picture>
         </div>
 
         <div class="hero__cta">

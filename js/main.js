@@ -8,12 +8,14 @@ const closeMenuBtn = document.querySelector('.menu-close');
 
 function openMenu() {
   mobileMenu.classList.add('open');
+  hamburger.classList.add('active');
   hamburger.setAttribute('aria-expanded', 'true');
   document.body.style.overflow = 'hidden';
 }
 
 function closeMenu() {
   mobileMenu.classList.remove('open');
+  hamburger.classList.remove('active');
   hamburger.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
 }
