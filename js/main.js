@@ -124,41 +124,48 @@ document.querySelectorAll('.faq-question').forEach(question => {
 });
 
 /* ============================================================
-   SERVICES CARDS — select + nudge
+   SERVICES CARDS — stage lighting selection
    ============================================================ */
 
 (function () {
+  const grid = document.querySelector('.services__grid');
   const cards = document.querySelectorAll('.services__card');
   const nudge = document.getElementById('services-nudge');
-  if (!cards.length || !nudge) return;
 
-  function selectCard(card) {
-    const isAlreadySelected = card.classList.contains('selected');
+  if (!grid || !cards.length || !nudge) return;
 
-    // Deselect all
+  function reset() {
     cards.forEach(c => c.classList.remove('selected'));
-
-    if (isAlreadySelected) {
-      // Toggle off — hide nudge
-      nudge.classList.remove('visible');
-    } else {
-      // Select this card — show nudge
-      card.classList.add('selected');
-      nudge.classList.add('visible');
-    }
+    grid.classList.remove('has-selection');
+    nudge.classList.remove('visible');
   }
 
   cards.forEach(card => {
-    // Click / tap
-    card.addEventListener('click', () => selectCard(card));
+    card.addEventListener('click', () => {
+      const isAlreadySelected = card.classList.contains('selected');
 
-    // Keyboard — Enter or Space
+      reset();
+
+      if (!isAlreadySelected) {
+        grid.classList.add('has-selection');
+        card.classList.add('selected');
+
+        // Nudge slides in after card animation plays
+        setTimeout(() => nudge.classList.add('visible'), 180);
+      }
+    });
+
     card.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        selectCard(card);
+        card.click();
       }
     });
+  });
+
+  // Click outside grid resets everything
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.services__card')) reset();
   });
 })();
 
