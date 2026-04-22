@@ -1055,89 +1055,78 @@ textarea {
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  border: 1.5px solid transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.04);
   position: relative;
   outline: none;
-  will-change: transform, opacity, filter;
-  transition: transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1),
-              box-shadow 0.35s ease,
-              opacity 0.35s ease,
-              filter 0.35s ease,
-              border-color 0.35s ease,
-              background 0.35s ease;
+  overflow: hidden;
+  will-change: transform, opacity;
+  transition: transform 0.3s cubic-bezier(0.34, 1.2, 0.64, 1),
+              box-shadow 0.3s ease,
+              opacity 0.3s ease,
+              background 0.3s ease,
+              border-color 0.3s ease;
 }
 
 .services__card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0, 3, 26, 0.3);
+  transform: translateY(-2px);
+  border-color: rgba(255, 254, 244, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 3, 26, 0.25);
 }
 
-/* All cards dim when a selection is active */
+/* All cards dim when grid has selection */
 .services__grid.has-selection .services__card {
-  opacity: 0.38;
-  filter: blur(0.6px);
-  transform: scale(0.97);
+  opacity: 0.35;
+  transform: scale(0.975);
   box-shadow: none;
+  border-color: transparent;
 }
 
-/* Selected card steps forward */
+/* Selected card — warm illumination */
 .services__grid.has-selection .services__card.selected {
   opacity: 1;
-  filter: none;
-  transform: scale(1.04) translateY(-6px);
-  background: #111640;
-  border-color: rgba(255, 254, 244, 0.35);
-  box-shadow: 0 0 0 1px rgba(255, 254, 244, 0.08),
-              0 16px 48px rgba(0, 3, 26, 0.5),
-              0 0 32px rgba(255, 254, 244, 0.04);
+  transform: scale(1.03) translateY(-5px);
+  background: #0e1535;
+  border-color: rgba(255, 254, 244, 0.25);
+  box-shadow: 0 0 0 1px rgba(255, 254, 244, 0.06),
+              0 12px 40px rgba(0, 3, 26, 0.45),
+              inset 0 1px 0 rgba(255, 254, 244, 0.08);
   z-index: 2;
 }
 
-/* Left border sweep */
-.services__card.selected::before {
+/* Animated cream underline on selected card */
+.services__card::after {
   content: '';
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
-  width: 3px;
-  height: 100%;
+  width: 0%;
+  height: 2px;
   background: linear-gradient(
-    180deg,
-    rgba(255, 254, 244, 0) 0%,
-    rgba(255, 254, 244, 0.6) 50%,
-    rgba(255, 254, 244, 0) 100%
+    90deg,
+    transparent,
+    rgba(255, 254, 244, 0.5),
+    transparent
   );
-  border-radius: 12px 0 0 12px;
-  animation: border-sweep 0.5s ease forwards;
+  transition: width 0.5s ease;
+  border-radius: 0 0 12px 12px;
 }
 
-@keyframes border-sweep {
-  from {
-    opacity: 0;
-    transform: scaleY(0);
-    transform-origin: top;
-  }
-  to {
-    opacity: 1;
-    transform: scaleY(1);
-    transform-origin: top;
-  }
+.services__card.selected::after {
+  width: 100%;
 }
 
 .services__card.selected .services__card-number {
-  background: rgba(255, 254, 244, 0.12);
-  border-color: rgba(255, 254, 244, 0.7);
-  color: #fffef4;
-  box-shadow: 0 0 16px rgba(255, 254, 244, 0.12);
+  border-color: rgba(255, 254, 244, 0.5);
+  color: rgba(255, 254, 244, 0.9);
+  background: rgba(255, 254, 244, 0.06);
 }
 
 .services__card.selected .services__card-situation {
-  color: rgba(255, 254, 244, 0.9);
+  color: rgba(255, 254, 244, 0.88);
 }
 
 .services__card.selected .services__card-name {
   color: #ffffff;
-  font-size: 15px;
 }
 
 /* Nudge element — hidden by default */
@@ -1194,6 +1183,142 @@ textarea {
   50% {
     transform: rotate(45deg) translateY(4px);
     opacity: 1;
+  }
+}
+
+/* ============================================================
+   RESPONSE PANEL
+   ============================================================ */
+
+.response-panel {
+  background: var(--navy);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0;
+  border-top: 1px solid transparent;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.4s ease,
+              padding 0.4s ease,
+              border-color 0.4s ease;
+}
+
+.response-panel.active {
+  max-height: 600px;
+  opacity: 1;
+  padding: 64px 0;
+  border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+.panel-content {
+  display: none;
+}
+
+.panel-content.visible {
+  display: block;
+}
+
+.panel__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.panel__label {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.panel__situation {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  font-style: italic;
+  color: rgba(255, 254, 244, 0.5);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.panel__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0 0 32px 0;
+  padding: 0;
+}
+
+.panel__steps li {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: rgba(255, 254, 244, 0.75);
+  line-height: 1.6;
+  padding-left: 20px;
+  position: relative;
+}
+
+.panel__steps li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 254, 244, 0.4);
+}
+
+.panel__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cream);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 254, 244, 0.3);
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease,
+              gap 0.2s ease;
+}
+
+.panel__cta:hover {
+  border-color: var(--cream);
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .panel__inner {
+    flex-direction: row;
+    gap: 80px;
+    align-items: flex-start;
+  }
+
+  .panel__left {
+    flex: 0 0 35%;
+  }
+
+  .panel__right {
+    flex: 1;
+  }
+
+  .panel__situation {
+    font-size: 28px;
+  }
+}
+
+/* ============================================================
+   TESTIMONIALS SECTION (standalone at bottom)
+   ============================================================ */
+
+.testimonials {
+  background: var(--navy);
+  padding: var(--space-7) 0;
+}
+
+@media (min-width: 1024px) {
+  .testimonials {
+    padding: 120px 0;
   }
 }
 

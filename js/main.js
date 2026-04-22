@@ -124,34 +124,70 @@ document.querySelectorAll('.faq-question').forEach(question => {
 });
 
 /* ============================================================
-   SERVICES CARDS — stage lighting selection
+   SERVICES CARDS — stage lighting + response panel
    ============================================================ */
 
 (function () {
   const grid = document.querySelector('.services__grid');
   const cards = document.querySelectorAll('.services__card');
   const nudge = document.getElementById('services-nudge');
+  const responsePanel = document.querySelector('.response-panel');
+  const allPanels = document.querySelectorAll('.panel-content');
 
-  if (!grid || !cards.length || !nudge) return;
+  if (!grid || !cards.length) return;
+
+  function showPanel(panelNumber) {
+    allPanels.forEach(p => {
+      p.hidden = true;
+      p.classList.remove('visible');
+    });
+    const target = document.querySelector(
+      `.panel-content[data-panel="${panelNumber}"]`
+    );
+    if (target && responsePanel) {
+      target.hidden = false;
+      target.classList.add('visible');
+      responsePanel.classList.add('active');
+      setTimeout(() => {
+        responsePanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 300);
+    }
+  }
+
+  function hidePanel() {
+    if (responsePanel) {
+      responsePanel.classList.remove('active');
+      setTimeout(() => {
+        allPanels.forEach(p => {
+          p.hidden = true;
+          p.classList.remove('visible');
+        });
+      }, 500);
+    }
+  }
 
   function reset() {
     cards.forEach(c => c.classList.remove('selected'));
     grid.classList.remove('has-selection');
-    nudge.classList.remove('visible');
+    if (nudge) nudge.classList.remove('visible');
+    hidePanel();
   }
 
-  cards.forEach(card => {
+  cards.forEach((card, index) => {
     card.addEventListener('click', () => {
       const isAlreadySelected = card.classList.contains('selected');
 
-      reset();
+      cards.forEach(c => c.classList.remove('selected'));
+      grid.classList.remove('has-selection');
+      if (nudge) nudge.classList.remove('visible');
 
       if (!isAlreadySelected) {
         grid.classList.add('has-selection');
         card.classList.add('selected');
-
-        // Nudge slides in after card animation plays
-        setTimeout(() => nudge.classList.add('visible'), 180);
+        if (nudge) setTimeout(() => nudge.classList.add('visible'), 180);
+        showPanel(index + 1);
+      } else {
+        hidePanel();
       }
     });
 
@@ -163,9 +199,11 @@ document.querySelectorAll('.faq-question').forEach(question => {
     });
   });
 
-  // Click outside grid resets everything
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('.services__card')) reset();
+    if (!e.target.closest('.services__card') &&
+        !e.target.closest('.response-panel')) {
+      reset();
+    }
   });
 })();
 
