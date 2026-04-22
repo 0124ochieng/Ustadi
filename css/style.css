@@ -1519,6 +1519,12 @@ textarea {
   width: 28px;
   height: 28px;
   object-fit: contain;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.footer__social a:hover .footer__social-icon {
+  opacity: 1;
 }
 
 .footer__contact {
