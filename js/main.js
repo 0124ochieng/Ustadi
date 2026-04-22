@@ -122,3 +122,73 @@ document.querySelectorAll('.faq-question').forEach(question => {
     question.style.transform = '';
   });
 });
+
+/* ============================================================
+   TRUST BUBBLES — magnetic cursor effect (desktop only)
+   ============================================================ */
+
+(function () {
+  if ('ontouchstart' in window) return;
+
+  const bubbles = document.querySelectorAll('.trust__bubble');
+  if (!bubbles.length) return;
+
+  const PULL_STRENGTH = 0.25;
+  const ACTIVATION_RADIUS = 160;
+
+  function applyMagnet(bubble, clientX, clientY) {
+    const rect = bubble.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const distX = clientX - centerX;
+    const distY = clientY - centerY;
+    const distance = Math.sqrt(distX * distX + distY * distY);
+
+    if (distance < ACTIVATION_RADIUS) {
+      const pull = (ACTIVATION_RADIUS - distance) / ACTIVATION_RADIUS;
+      const moveX = distX * pull * PULL_STRENGTH;
+      const moveY = distY * pull * PULL_STRENGTH;
+      bubble.classList.add('magnetic');
+      bubble.classList.remove('returning');
+      bubble.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      return true;
+    }
+    return false;
+  }
+
+  function releaseMagnet(bubble) {
+    bubble.classList.remove('magnetic');
+    bubble.classList.add('returning');
+    bubble.style.transform = '';
+    setTimeout(() => bubble.classList.remove('returning'), 800);
+  }
+
+  // Direct bubble mousemove — most precise
+  bubbles.forEach(bubble => {
+    bubble.addEventListener('mousemove', (e) => {
+      applyMagnet(bubble, e.clientX, e.clientY);
+    });
+
+    bubble.addEventListener('mouseleave', () => {
+      releaseMagnet(bubble);
+    });
+  });
+
+  // Container-level tracking — activates magnet before cursor lands on card
+  const trustArea = document.querySelector('.trust-area');
+  if (!trustArea) return;
+
+  trustArea.addEventListener('mousemove', (e) => {
+    bubbles.forEach(bubble => {
+      if (bubble.classList.contains('magnetic')) return;
+      const activated = applyMagnet(bubble, e.clientX, e.clientY);
+      if (!activated && bubble.classList.contains('magnetic')) {
+        releaseMagnet(bubble);
+      }
+    });
+  });
+
+  trustArea.addEventListener('mouseleave', () => {
+    bubbles.forEach(bubble => releaseMagnet(bubble));
+  });
+})();
