@@ -957,14 +957,15 @@ textarea {
 }
 
 .hiw__circle-wrap {
-  width: 84px;
-  height: 84px;
+  width: 88px;
+  height: 88px;
   border-radius: 50%;
-  border: 0.5px dashed rgba(255, 255, 255, 0.3);
+  border: 1px dashed rgba(255, 255, 255, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  padding: 4px;
   margin-bottom: 16px;
 }
 
@@ -975,6 +976,7 @@ textarea {
   border: none;
   object-fit: cover;
   display: block;
+  flex-shrink: 0;
 }
 
 .hiw__step-title {
@@ -1774,13 +1776,14 @@ textarea {
   }
 
   .hiw__circle-wrap {
-    width: 100px;
-    height: 100px;
+    width: 108px;
+    height: 108px;
+    padding: 4px;
   }
 
   .hiw__circle-img {
-    width: 96px;
-    height: 96px;
+    width: 100px;
+    height: 100px;
   }
 
   .hiw__number {
