@@ -130,7 +130,6 @@ document.querySelectorAll('.faq-question').forEach(question => {
 (function () {
   const grid = document.querySelector('.services__grid');
   const cards = document.querySelectorAll('.services__card');
-  const nudge = document.getElementById('services-nudge');
   const responsePanel = document.querySelector('.response-panel');
   const allPanels = document.querySelectorAll('.panel-content');
 
@@ -169,7 +168,6 @@ document.querySelectorAll('.faq-question').forEach(question => {
   function reset() {
     cards.forEach(c => c.classList.remove('selected'));
     grid.classList.remove('has-selection');
-    if (nudge) nudge.classList.remove('visible');
     hidePanel();
   }
 
@@ -179,12 +177,10 @@ document.querySelectorAll('.faq-question').forEach(question => {
 
       cards.forEach(c => c.classList.remove('selected'));
       grid.classList.remove('has-selection');
-      if (nudge) nudge.classList.remove('visible');
 
       if (!isAlreadySelected) {
         grid.classList.add('has-selection');
         card.classList.add('selected');
-        if (nudge) setTimeout(() => nudge.classList.add('visible'), 180);
         showPanel(index + 1);
       } else {
         hidePanel();

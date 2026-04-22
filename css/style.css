@@ -1129,66 +1129,13 @@ textarea {
   color: #ffffff;
 }
 
-/* Nudge element — hidden by default */
-.services__nudge {
-  height: 0;
-  overflow: hidden;
-  opacity: 0;
-  display: flex;
-  justify-content: center;
-  margin-top: 8px;
-  margin-bottom: 0;
-  transition: height 0.45s cubic-bezier(0.34, 1.2, 0.64, 1),
-              opacity 0.3s ease;
-}
-
-.services__nudge.visible {
-  height: 64px;
-  opacity: 1;
-  margin-bottom: 24px;
-}
-
-.services__nudge-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding-top: 12px;
-}
-
-.services__nudge-text {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 500;
-  font-style: italic;
-  color: rgba(0, 3, 26, 0.5);
-  text-align: center;
-  letter-spacing: 0.01em;
-}
-
-.services__nudge-arrow {
-  width: 12px;
-  height: 12px;
-  border-right: 1.5px solid rgba(0, 3, 26, 0.3);
-  border-bottom: 1.5px solid rgba(0, 3, 26, 0.3);
-  transform: rotate(45deg);
-  animation: nudge-pulse 1s ease-in-out infinite;
-}
-
-@keyframes nudge-pulse {
-  0%, 100% {
-    transform: rotate(45deg) translateY(0);
-    opacity: 0.4;
-  }
-  50% {
-    transform: rotate(45deg) translateY(4px);
-    opacity: 1;
-  }
-}
-
 /* ============================================================
    RESPONSE PANEL
    ============================================================ */
+
+.services__grid {
+  margin-bottom: 0;
+}
 
 .response-panel {
   background: var(--navy);
@@ -1196,18 +1143,39 @@ textarea {
   overflow: hidden;
   opacity: 0;
   padding: 0;
-  border-top: 1px solid transparent;
+  margin: 32px -24px 0;
+  border-radius: 0;
   transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
               opacity 0.4s ease,
-              padding 0.4s ease,
-              border-color 0.4s ease;
+              padding 0.4s ease;
 }
 
 .response-panel.active {
   max-height: 600px;
   opacity: 1;
-  padding: 64px 0;
-  border-top-color: rgba(255, 255, 255, 0.06);
+  padding: 56px 24px;
+}
+
+.services:has(.response-panel.active) {
+  padding-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .response-panel {
+    margin-left: -40px;
+    margin-right: -40px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .response-panel {
+    margin-left: -80px;
+    margin-right: -80px;
+  }
+
+  .response-panel.active {
+    padding: 72px 80px;
+  }
 }
 
 .panel-content {
@@ -1355,27 +1323,6 @@ textarea {
   margin: 0;
 }
 
-.services__closing {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  text-align: center;
-}
-
-.services__closing-logo {
-  width: 120px;
-  height: auto;
-}
-
-.services__closing-text {
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-style: italic;
-  color: rgba(0, 3, 26, 0.55);
-  text-align: center;
-  max-width: 280px;
-}
 
 /* ============================================================
    TRUST / TESTIMONIALS SECTION
@@ -2119,19 +2066,6 @@ textarea {
 
   .services__card-name {
     font-size: 16px;
-  }
-
-  .services__closing {
-    gap: 20px;
-  }
-
-  .services__closing-logo {
-    width: 140px;
-  }
-
-  .services__closing-text {
-    font-size: 16px;
-    max-width: 400px;
   }
 
   /* Trust / Testimonials */
