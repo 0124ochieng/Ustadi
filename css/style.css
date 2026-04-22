@@ -1655,3 +1655,355 @@ textarea {
     font-size: 20px;
   }
 }
+
+/* ============================================================
+   DESKTOP SPACING — Section padding (1024px+)
+   ============================================================ */
+
+@media (min-width: 1024px) {
+
+  /* Navbar */
+  .navbar {
+    height: 72px;
+  }
+
+  .navbar__inner {
+    height: 72px;
+  }
+
+  /* Section padding */
+  .hero {
+    padding: 120px 0 100px;
+  }
+
+  .why-ustadi {
+    padding: 120px 0;
+  }
+
+  .how-it-works {
+    padding: 120px 0;
+  }
+
+  .services {
+    padding: 120px 0;
+  }
+
+  .trust {
+    padding: 120px 0 100px;
+  }
+
+  .faq {
+    padding: 120px 0;
+  }
+
+  .footer {
+    padding: 80px 0 48px;
+  }
+
+  /* Labels */
+  .hero__label,
+  .why__label,
+  .hiw__label,
+  .services__label,
+  .trust__label,
+  .faq__label {
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+
+  /* Hero */
+  .hero__headline {
+    margin-bottom: 32px;
+  }
+
+  .hero__sub {
+    margin-bottom: 48px;
+  }
+
+  .hero__image {
+    height: 560px;
+  }
+
+  /* Why Ustadi */
+  .why__headline {
+    margin-bottom: 16px;
+  }
+
+  .why__sub {
+    margin-bottom: 64px;
+  }
+
+  .why__cards {
+    gap: 32px;
+  }
+
+  .why__card {
+    padding: 32px;
+    gap: 16px;
+  }
+
+  .why__founder {
+    margin-top: 80px;
+  }
+
+  .why__divider {
+    margin-bottom: 48px;
+  }
+
+  .why__quote {
+    font-size: 17px;
+    max-width: 640px;
+  }
+
+  /* How It Works */
+  .hiw__headline {
+    margin-bottom: 16px;
+  }
+
+  .hiw__sub {
+    margin-bottom: 72px;
+  }
+
+  .hiw__steps {
+    gap: 80px;
+  }
+
+  .hiw__step {
+    gap: 32px;
+  }
+
+  .hiw__circle-wrap {
+    width: 100px;
+    height: 100px;
+  }
+
+  .hiw__circle-img {
+    width: 96px;
+    height: 96px;
+  }
+
+  .hiw__number {
+    font-size: 96px;
+  }
+
+  .hiw__step-title {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .hiw__step-body {
+    font-size: 15px;
+  }
+
+  .hiw__transition {
+    margin-top: 80px;
+  }
+
+  /* Services */
+  .services__headline {
+    margin-bottom: 16px;
+  }
+
+  .services__sub {
+    margin-bottom: 64px;
+  }
+
+  .services__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 80px;
+  }
+
+  .services__card {
+    padding: 32px 24px;
+    min-height: 240px;
+  }
+
+  .services__card-number {
+    width: 44px;
+    height: 44px;
+    font-size: 14px;
+    line-height: 44px;
+    margin-bottom: 20px;
+  }
+
+  .services__card-situation {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+
+  .services__card-name {
+    font-size: 16px;
+  }
+
+  .services__closing {
+    gap: 20px;
+  }
+
+  .services__closing-logo {
+    width: 140px;
+  }
+
+  .services__closing-text {
+    font-size: 16px;
+    max-width: 400px;
+  }
+
+  /* Trust / Testimonials */
+  .trust__headline {
+    margin-bottom: 16px;
+  }
+
+  .trust__sub {
+    margin-bottom: 64px;
+  }
+
+  .trust__bubbles {
+    gap: 32px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .trust__bubble {
+    padding: 24px 28px;
+  }
+
+  .trust__bubble p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .trust__divider-wrap {
+    padding: 80px 0 64px;
+  }
+
+  .trust__divider {
+    margin-bottom: 64px;
+  }
+
+  .trust__transition {
+    font-size: 18px;
+  }
+
+  /* Booking Form */
+  .booking__headline {
+    font-size: 40px;
+    margin-bottom: 16px;
+    max-width: 600px;
+  }
+
+  .booking__sub {
+    font-size: 20px;
+    margin-bottom: 64px;
+  }
+
+  .booking__form {
+    max-width: 600px;
+  }
+
+  .form-group {
+    margin-bottom: 40px;
+  }
+
+  .form-sentence {
+    font-size: 19px;
+    margin-bottom: 8px;
+  }
+
+  .form-field {
+    font-size: 19px;
+    height: 52px;
+  }
+
+  .booking__btn {
+    margin-top: 56px;
+    height: 60px;
+    font-size: 16px;
+  }
+
+  .booking__trust {
+    font-size: 14px;
+    margin-top: 20px;
+  }
+
+  /* FAQ */
+  .faq__headline {
+    margin-bottom: 16px;
+  }
+
+  .faq__sub {
+    margin-bottom: 56px;
+  }
+
+  .faq__list {
+    margin-bottom: 72px;
+  }
+
+  .faq-question {
+    height: 72px;
+    font-size: 17px;
+    padding: 0 20px;
+  }
+
+  .faq-answer p {
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 0 20px;
+  }
+
+  .faq-item.open .faq-answer {
+    padding: 0 20px 24px;
+  }
+
+  .faq__whatsapp-text {
+    font-size: 16px;
+  }
+
+  .faq__whatsapp-link {
+    font-size: 18px;
+  }
+
+  .faq__whatsapp-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Footer */
+  .footer__logo {
+    width: 140px;
+  }
+
+  .footer__tagline {
+    font-size: 17px;
+    margin-bottom: 56px;
+  }
+
+  .footer__nav-links {
+    gap: 8px 32px;
+  }
+
+  .footer__nav-links a {
+    font-size: 13px;
+  }
+
+  .footer__social {
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .footer__social-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .footer__contact p {
+    font-size: 15px;
+    line-height: 2;
+  }
+
+  .footer__copyright {
+    font-size: 13px;
+  }
+
+}
