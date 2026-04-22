@@ -1055,11 +1055,103 @@ textarea {
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  border: 1.5px solid transparent;
+  position: relative;
+  outline: none;
+  transition: transform 0.25s ease,
+              box-shadow 0.25s ease,
+              border-color 0.25s ease,
+              background 0.25s ease;
 }
 
 .services__card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0, 3, 26, 0.3);
+}
+
+.services__card.selected {
+  border-color: rgba(255, 254, 244, 0.4);
+  box-shadow: 0 0 0 3px rgba(255, 254, 244, 0.08),
+              0 8px 40px rgba(0, 3, 26, 0.4);
+  transform: translateY(-4px);
+  background: #0d1235;
+}
+
+.services__card.selected .services__card-number {
+  border-color: rgba(255, 254, 244, 0.6);
+  color: rgba(255, 254, 244, 0.9);
+  box-shadow: 0 0 12px rgba(255, 254, 244, 0.15);
+}
+
+.services__card.selected .services__card-situation {
+  color: rgba(255, 254, 244, 0.95);
+}
+
+.services__card.selected .services__card-name {
+  color: #ffffff;
+}
+
+/* Nudge element — hidden by default */
+.services__nudge {
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.3s ease;
+  margin-bottom: 0;
+}
+
+.services__nudge.visible {
+  height: 60px;
+  opacity: 1;
+  margin-bottom: 16px;
+}
+
+.services__nudge-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 0 8px;
+}
+
+.services__nudge-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(0, 3, 26, 0.6);
+}
+
+.services__nudge-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.services__nudge-arrow span {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid rgba(0, 3, 26, 0.4);
+  border-bottom: 1.5px solid rgba(0, 3, 26, 0.4);
+  transform: rotate(45deg);
+  animation: nudge-bounce 1.2s ease infinite;
+}
+
+.services__nudge-arrow span:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+@keyframes nudge-bounce {
+  0%, 100% {
+    opacity: 0.3;
+    transform: rotate(45deg) translate(0, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(45deg) translate(2px, 2px);
+  }
 }
 
 .services__card-number {

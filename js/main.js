@@ -124,6 +124,45 @@ document.querySelectorAll('.faq-question').forEach(question => {
 });
 
 /* ============================================================
+   SERVICES CARDS — select + nudge
+   ============================================================ */
+
+(function () {
+  const cards = document.querySelectorAll('.services__card');
+  const nudge = document.getElementById('services-nudge');
+  if (!cards.length || !nudge) return;
+
+  function selectCard(card) {
+    const isAlreadySelected = card.classList.contains('selected');
+
+    // Deselect all
+    cards.forEach(c => c.classList.remove('selected'));
+
+    if (isAlreadySelected) {
+      // Toggle off — hide nudge
+      nudge.classList.remove('visible');
+    } else {
+      // Select this card — show nudge
+      card.classList.add('selected');
+      nudge.classList.add('visible');
+    }
+  }
+
+  cards.forEach(card => {
+    // Click / tap
+    card.addEventListener('click', () => selectCard(card));
+
+    // Keyboard — Enter or Space
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        selectCard(card);
+      }
+    });
+  });
+})();
+
+/* ============================================================
    TRUST BUBBLES — magnetic cursor effect (desktop only)
    ============================================================ */
 
