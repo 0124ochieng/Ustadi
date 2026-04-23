@@ -774,12 +774,14 @@ textarea {
    ============================================================ */
 
 .hero {
-  padding: 80px 0 100px;
+  padding: 100px 0 120px;
   background-color: #1f2a2e;
 }
 
 .hero__content {
   max-width: 680px;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .hero__label {
@@ -793,57 +795,34 @@ textarea {
   font-family: var(--font-display);
   font-size: 44px;
   font-weight: 700;
-  color: rgb(239, 233, 221);
   line-height: 1.15;
   margin-bottom: 28px;
+  background: linear-gradient(
+    135deg,
+    rgb(239, 233, 221) 0%,
+    rgb(239, 233, 221) 55%,
+    rgba(201, 191, 168, 0.6) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   animation: fadeUp 0.7s ease 0.2s both;
-}
-
-/* The rotating word container */
-.hero__rotate-wrap {
-  display: block;
-  position: relative;
-  padding-top: 4px;
-}
-
-.hero__rotate {
-  display: inline-block;
-  color: rgb(239, 233, 221);
-  opacity: 1;
-  transition: opacity 0.5s ease,
-              transform 0.5s ease;
-  transform: translateY(0);
-  min-width: 0;
-}
-
-.hero__rotate-static {
-  display: inline-block;
-  color: rgb(239, 233, 221);
-}
-
-/* Fade out state */
-.hero__rotate.fading-out {
-  opacity: 0;
-  transform: translateY(-8px);
-}
-
-/* Fade in state */
-.hero__rotate.fading-in {
-  opacity: 0;
-  transform: translateY(8px);
 }
 
 .hero__sub {
   color: #c9bfa8;
   margin-bottom: 40px;
   max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
   animation: fadeUp 0.6s ease 0.35s both;
 }
 
 .hero__cta {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   gap: 16px;
   animation: fadeUp 0.6s ease 0.45s both;
 }
@@ -861,19 +840,12 @@ textarea {
 }
 
 @media (min-width: 768px) {
-  .hero {
-    padding: 100px 0 120px;
-  }
   .hero__headline {
     font-size: 56px;
-    margin-bottom: 32px;
   }
 }
 
 @media (min-width: 1024px) {
-  .hero {
-    padding: 120px 0 140px;
-  }
   .hero__headline {
     font-size: 64px;
     line-height: 1.1;
@@ -884,11 +856,55 @@ textarea {
 }
 
 /* ============================================================
+   GLOBAL SECTION CENTRING
+   ============================================================ */
+
+.why__header,
+.hiw__label,
+.hiw__headline,
+.hiw__sub,
+.services__label,
+.services__headline,
+.services__sub,
+.trust__label,
+.trust__headline,
+.trust__sub,
+.booking__headline,
+.booking__sub,
+.faq__label,
+.faq__headline,
+.faq__sub {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.why__headline {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hiw__headline,
+.services__headline,
+.trust__headline,
+.faq__headline {
+  max-width: 560px;
+}
+
+.hiw__sub,
+.services__sub,
+.trust__sub,
+.faq__sub {
+  max-width: 480px;
+}
+
+/* ============================================================
    WHY USTADI SECTION
    ============================================================ */
 
 .why-ustadi {
-  padding: var(--space-7) 0;
+  padding: 120px 0;
   background-color: #1f2a2e;
 }
 
@@ -915,25 +931,42 @@ textarea {
   gap: 0;
 }
 
+/* Base state — invisible, shifted down */
 .why__point {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease,
+              transform 0.7s ease;
+  padding: 32px 0;
+  border-top: 1px solid rgba(239, 233, 221, 0.08);
   display: flex;
   align-items: flex-start;
   gap: 24px;
-  padding: 32px 0;
-  border-top: 1px solid rgba(239, 233, 221, 0.08);
-  transition: transform 0.3s cubic-bezier(0.34, 1.2, 0.64, 1),
-              border-color 0.3s ease;
+  will-change: opacity, transform;
 }
 
 .why__point:last-child {
   border-bottom: 1px solid rgba(239, 233, 221, 0.08);
 }
 
-/* Hover — subtle lift */
-.why__point:hover {
-  transform: translateX(6px);
-  border-top-color: rgba(239, 233, 221, 0.2);
+/* Visible state — scrolled into view */
+.why__point.revealed {
+  opacity: 1;
+  transform: translateY(0);
 }
+
+/* Fading out — scrolled past */
+.why__point.fading-past {
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: opacity 0.5s ease,
+              transform 0.5s ease;
+}
+
+/* Stagger delays */
+.why__point:nth-child(1) { transition-delay: 0s; }
+.why__point:nth-child(2) { transition-delay: 0.15s; }
+.why__point:nth-child(3) { transition-delay: 0.3s; }
 
 .why__point-icon {
   width: 24px;
@@ -1019,7 +1052,7 @@ textarea {
    ============================================================ */
 
 .how-it-works {
-  padding: 64px 0;
+  padding: 120px 0;
 }
 
 .hiw__label {
@@ -1147,7 +1180,7 @@ textarea {
    ============================================================ */
 
 .services {
-  padding: var(--space-7) 0;
+  padding: 120px 0;
   background-color: var(--cream);
   color: var(--navy);
 }
@@ -1430,13 +1463,7 @@ textarea {
 
 .testimonials {
   background: var(--navy);
-  padding: var(--space-7) 0;
-}
-
-@media (min-width: 1024px) {
-  .testimonials {
-    padding: 120px 0;
-  }
+  padding: 120px 0;
 }
 
 .services__card-number {
@@ -1478,7 +1505,7 @@ textarea {
    ============================================================ */
 
 .trust {
-  padding: var(--space-7) 0 var(--space-8);
+  padding: 120px 0 100px;
 }
 
 .trust__label {
@@ -1638,7 +1665,7 @@ textarea {
    ============================================================ */
 
 .faq {
-  padding: var(--space-7) 0;
+  padding: 120px 0;
   background-color: var(--cream);
   color: var(--navy);
 }
@@ -2161,25 +2188,13 @@ textarea {
   }
 
   /* Section padding */
-  .why-ustadi {
-    padding: 120px 0;
-  }
-
-  .how-it-works {
-    padding: 120px 0;
-  }
-
-  .services {
-    padding: 120px 0;
-  }
-
-  .trust {
-    padding: 120px 0 100px;
-  }
-
-  .faq {
-    padding: 120px 0;
-  }
+  .hero { padding: 140px 0 160px; }
+  .why-ustadi { padding: 160px 0; }
+  .how-it-works { padding: 160px 0; }
+  .services { padding: 160px 0; }
+  .trust { padding: 160px 0 140px; }
+  .faq { padding: 160px 0; }
+  .testimonials { padding: 160px 0; }
 
   .footer {
     padding: 80px 0 48px;

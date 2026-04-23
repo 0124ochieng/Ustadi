@@ -324,59 +324,44 @@ window.addEventListener('resize', () => {
   }
 });
 
-/* ── Hero word rotation ── */
+/* ── Why Ustadi scroll reveal ── */
 (function() {
 
-  const el = document.getElementById('heroRotate');
-  if (!el) return;
+  const points = document.querySelectorAll(
+    '.why__point'
+  );
+  if (!points.length) return;
 
-  const words = [
-    'prove',
-    'achieve',
-    'discover',
-    'demonstrate',
-    'realise'
-  ];
-
-  let current = 0;
-  let timer = null;
-
-  function rotateWord() {
-    // Fade out current word
-    el.classList.add('fading-out');
-
-    setTimeout(() => {
-      // Change word
-      current = (current + 1) % words.length;
-      el.textContent = words[current];
-
-      // Fade in state
-      el.classList.remove('fading-out');
-      el.classList.add('fading-in');
-
-      // Force reflow
-      el.getBoundingClientRect();
-
-      // Fade in
-      requestAnimationFrame(() => {
-        el.classList.remove('fading-in');
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          entry.target.classList.remove('fading-past');
+        } else {
+          const rect = entry.target
+            .getBoundingClientRect();
+          if (rect.top < 0) {
+            // Above viewport — fade out upward
+            entry.target.classList.add('fading-past');
+            entry.target.classList.remove('revealed');
+          } else {
+            // Below viewport — reset to base
+            entry.target.classList.remove(
+              'revealed', 'fading-past'
+            );
+          }
+        }
       });
+    },
+    {
+      threshold: 0.25,
+      rootMargin: '0px 0px -10% 0px'
+    }
+  );
 
-    }, 500);
-  }
-
-  // Start rotation after 2.5 seconds
-  setTimeout(() => {
-    timer = setInterval(rotateWord, 3200);
-  }, 2500);
-
-  // Pause on hover — let user read
-  el.addEventListener('mouseenter', () => {
-    clearInterval(timer);
-  });
-
-  el.addEventListener('mouseleave', () => {
-    timer = setInterval(rotateWord, 3200);
+  points.forEach(point => {
+    revealObserver.observe(point);
   });
 
 })();
