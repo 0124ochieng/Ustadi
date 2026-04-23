@@ -364,24 +364,43 @@ textarea {
   font-weight: 400;
 }
 
-.form-field:invalid:not(:placeholder-shown) {
-  border-bottom-color: rgba(239, 100, 100, 0.6);
+/* Remove any red on untouched fields */
+.form-field:invalid {
+  border-bottom-color: rgba(255, 255, 255, 0.25);
+  box-shadow: none;
 }
 
+/* Only show error after touched + invalid */
 .form-field.touched:invalid {
-  border-bottom-color: rgba(239, 100, 100, 0.6);
+  border-bottom-color: rgba(200, 80, 80, 0.5);
+}
+
+/* Remove browser default red shadow on untouched */
+.form-field:invalid:not(.touched) {
+  outline: none;
+  box-shadow: none;
+  border-bottom-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Also suppress browser native validation UI */
+.form-field:invalid:not(.touched):not(:focus) {
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 .field-error {
   display: none;
   font-size: 12px;
-  color: rgba(239, 100, 100, 0.8);
+  color: rgba(200, 80, 80, 0.7);
   margin-top: 6px;
   font-family: var(--font-body);
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
-.form-field.touched:invalid + .field-error {
+.form-field.touched:invalid ~ .field-error {
   display: block;
+  opacity: 1;
 }
 
 .form-select {
@@ -1523,6 +1542,11 @@ textarea {
 
 /* Divider + transition between halves */
 .trust__divider-wrap {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(10, 15, 18, 0.3) 100%
+  );
   padding: 64px 0 48px;
 }
 
@@ -1546,6 +1570,12 @@ textarea {
    ============================================================ */
 
 .booking {
+  background: linear-gradient(
+    180deg,
+    #1f2a2e 0%,
+    #192228 40%,
+    #141c20 100%
+  );
   padding-bottom: var(--space-7);
 }
 
@@ -1716,37 +1746,74 @@ textarea {
   transform: translateY(0);
 }
 
-/* WhatsApp closing */
-.faq__whatsapp {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  text-align: center;
+/* FAQ contact section */
+.faq__contact {
+  margin-top: 48px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(31, 42, 46, 0.08);
 }
 
-.faq__whatsapp-text {
+.faq__contact-intro {
   font-family: var(--font-body);
   font-size: 14px;
-  color: rgba(0, 3, 26, 0.6);
+  color: rgba(31, 42, 46, 0.55);
+  text-align: center;
+  margin-bottom: 32px;
   line-height: 1.6;
 }
 
-.faq__whatsapp-link {
+.faq__contact-options {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--navy);
-  text-decoration: none;
+  flex-direction: column;
+  gap: 1px;
+  background: rgba(31, 42, 46, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.faq__whatsapp-icon {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
+@media (min-width: 640px) {
+  .faq__contact-options {
+    flex-direction: row;
+  }
+}
+
+.faq__contact-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px 24px;
+  background: rgb(239, 233, 221);
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.faq__contact-option:hover {
+  background: rgb(229, 221, 207);
+}
+
+.faq__contact-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(31, 42, 46, 0.4);
+}
+
+.faq__contact-value {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2a2e;
+  letter-spacing: 0.01em;
+}
+
+.faq__contact-sub {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: rgba(31, 42, 46, 0.45);
+  line-height: 1.4;
 }
 
 /* ============================================================
@@ -1770,18 +1837,20 @@ textarea {
 }
 
 .footer__logo {
-  width: 120px;
+  width: 180px;
   height: auto;
 }
 
 .footer__tagline {
   font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255, 254, 244, 0.35);
-  letter-spacing: 0.2em;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(239, 233, 221, 0.35);
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  margin: 0;
+  margin-bottom: 48px;
+  max-width: 160px;
+  text-align: center;
 }
 
 /* Middle row */
@@ -2253,19 +2322,6 @@ textarea {
     padding: 0 20px 24px;
   }
 
-  .faq__whatsapp-text {
-    font-size: 16px;
-  }
-
-  .faq__whatsapp-link {
-    font-size: 18px;
-  }
-
-  .faq__whatsapp-icon {
-    width: 24px;
-    height: 24px;
-  }
-
   /* Footer */
   .footer {
     padding: 100px 0 48px;
@@ -2276,11 +2332,12 @@ textarea {
   }
 
   .footer__logo {
-    width: 140px;
+    width: 210px;
   }
 
   .footer__tagline {
-    font-size: 11px;
+    max-width: 185px;
+    font-size: 10px;
     letter-spacing: 0.28em;
   }
 
