@@ -186,7 +186,11 @@
 
       <!-- Logo (text placeholder — replace with SVG later) -->
       <a href="/" class="navbar__logo" aria-label="Ustadi Learning home">
-        <img src="assets/icons/fonts/white-ustadi-logo.webp" alt="Ustadi Learning" class="navbar__logo-img" width="80" height="28" loading="eager">
+        <img src="assets/icons/fonts/white-ustadi-logo.webp" alt="Ustadi Learning" class="navbar__logo-img"
+             width="120" height="40"
+             fetchpriority="high"
+             decoding="sync"
+             loading="eager">
       </a>
 
       <!-- Desktop nav links (hidden on mobile) -->
@@ -218,7 +222,11 @@
 
     <div class="mobile-menu__top">
       <a href="/" class="mobile-menu__logo" aria-label="Ustadi Learning home">
-        <img src="assets/icons/fonts/white-ustadi-logo.webp" alt="Ustadi Learning" class="navbar__logo-img" width="80" height="28" loading="eager">
+        <img src="assets/icons/fonts/white-ustadi-logo.webp" alt="Ustadi Learning" class="navbar__logo-img"
+             width="120" height="40"
+             fetchpriority="high"
+             decoding="sync"
+             loading="eager">
       </a>
       <button class="menu-close" aria-label="Close menu">
         <div class="close-icon">
@@ -918,7 +926,10 @@
         <img src="assets/icons/fonts/white-ustadi-logo.webp"
              alt="Ustadi Learning"
              class="footer__logo"
-             width="120" height="42" loading="lazy">
+             width="210" height="60"
+             loading="lazy"
+             fetchpriority="low"
+             decoding="async">
         <p class="footer__tagline">Discover Brilliance</p>
       </div>
 
