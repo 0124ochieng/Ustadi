@@ -201,6 +201,24 @@ document.querySelectorAll('.faq-question').forEach(question => {
       reset();
     }
   });
+
+  // Reset cards when services section leaves the viewport
+  const servicesSection = document.querySelector('.services');
+  if (servicesSection) {
+    const resetObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) {
+            cards.forEach(c => c.classList.remove('selected'));
+            grid.classList.remove('has-selection');
+            hidePanel();
+          }
+        });
+      },
+      { threshold: 0, rootMargin: '0px' }
+    );
+    resetObserver.observe(servicesSection);
+  }
 })();
 
 /* ============================================================
@@ -272,3 +290,36 @@ document.querySelectorAll('.faq-question').forEach(question => {
     bubbles.forEach(bubble => releaseMagnet(bubble));
   });
 })();
+
+/* ============================================================
+   WHY USTADI CARDS — scroll focus (mobile only)
+   ============================================================ */
+
+(function () {
+  if (window.innerWidth >= 768) return;
+
+  const whyCards = document.querySelectorAll('.why__card');
+  if (!whyCards.length) return;
+
+  const cardFocusObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-focus');
+        } else {
+          entry.target.classList.remove('in-focus');
+        }
+      });
+    },
+    { threshold: 0.55, rootMargin: '0px 0px -15% 0px' }
+  );
+
+  whyCards.forEach(card => cardFocusObserver.observe(card));
+})();
+
+window.addEventListener('resize', () => {
+  const whyCards = document.querySelectorAll('.why__card');
+  if (window.innerWidth >= 768) {
+    whyCards.forEach(c => c.classList.remove('in-focus'));
+  }
+});
