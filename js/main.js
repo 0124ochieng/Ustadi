@@ -323,3 +323,60 @@ window.addEventListener('resize', () => {
     whyCards.forEach(c => c.classList.remove('in-focus'));
   }
 });
+
+/* ── Hero word rotation ── */
+(function() {
+
+  const el = document.getElementById('heroRotate');
+  if (!el) return;
+
+  const words = [
+    'prove',
+    'achieve',
+    'discover',
+    'demonstrate',
+    'realise'
+  ];
+
+  let current = 0;
+  let timer = null;
+
+  function rotateWord() {
+    // Fade out current word
+    el.classList.add('fading-out');
+
+    setTimeout(() => {
+      // Change word
+      current = (current + 1) % words.length;
+      el.textContent = words[current];
+
+      // Fade in state
+      el.classList.remove('fading-out');
+      el.classList.add('fading-in');
+
+      // Force reflow
+      el.getBoundingClientRect();
+
+      // Fade in
+      requestAnimationFrame(() => {
+        el.classList.remove('fading-in');
+      });
+
+    }, 500);
+  }
+
+  // Start rotation after 2.5 seconds
+  setTimeout(() => {
+    timer = setInterval(rotateWord, 3200);
+  }, 2500);
+
+  // Pause on hover — let user read
+  el.addEventListener('mouseenter', () => {
+    clearInterval(timer);
+  });
+
+  el.addEventListener('mouseleave', () => {
+    timer = setInterval(rotateWord, 3200);
+  });
+
+})();

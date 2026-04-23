@@ -159,8 +159,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Hero image preload -->
-  <link rel="preload" as="image" href="assets/images/image-1.webp" type="image/webp">
+
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
@@ -235,39 +234,39 @@
     <!-- SECTION 1: HERO -->
     <section id="hero" class="hero">
       <div class="container">
-
         <div class="hero__content">
-          <span class="label hero__label">TUTORING · ELDORET &amp; EAST AFRICA</span>
 
-          <h1 class="headline-hero hero__headline">
-            Your child is capable of more.
-            We help them prove it.
+          <span class="label hero__label animate">
+            TUTORING · ELDORET &amp; EAST AFRICA
+          </span>
+
+          <h1 class="hero__headline animate">
+            Your child is capable of more.<br>
+            We help them
+            <span class="hero__rotate-wrap">
+              <span class="hero__rotate"
+                    id="heroRotate">prove</span>
+            </span>
+            it.
           </h1>
 
-          <p class="sub-headline hero__sub">
-            Expert one-on-one tutoring in Mathematics, Sciences and
-            Computer Studies — in-person and online.
+          <p class="sub-headline hero__sub animate">
+            Expert one-on-one tutoring in Mathematics,
+            Sciences and Computer Studies —
+            in-person and online.
           </p>
-        </div>
 
-        <div class="hero__image-wrap">
-          <picture>
-            <source srcset="assets/images/image-1.webp" type="image/webp">
-            <img src="assets/images/image-1.webp"
-                 alt="Student learning with Ustadi tutor"
-                 class="hero__image"
-                 width="390" height="260"
-                 loading="eager"
-                 fetchpriority="high"
-                 decoding="async">
-          </picture>
-        </div>
+          <div class="hero__cta animate">
+            <a href="#booking-form"
+               class="btn-primary hero__btn">
+              BOOK FREE SESSION
+            </a>
+            <p class="caption hero__trust">
+              No commitment. No payment. Just results.
+            </p>
+          </div>
 
-        <div class="hero__cta">
-          <a href="#booking-form" class="btn-primary hero__btn">BOOK FREE SESSION</a>
-          <p class="caption hero__trust">No commitment. No payment. Just results.</p>
         </div>
-
       </div>
     </section>
 
