@@ -79,7 +79,17 @@ if (form) {
 
     // Build WhatsApp fallback message
     const waMessage = encodeURIComponent(
-      `Hello Ustadi Learning,\n\nI would like to book a session.\n\nName: ${body.parentName || ''}\nChild Level: ${body.childLevel || ''}\nSubject: ${body.subject || ''}\nPreferred Time: ${body.preferredTime || ''}\nWhatsApp: ${body.whatsapp || ''}\n\nPlease confirm my booking. Thank you.`
+`Hi, I came across Ustadi Learning and I'm interested in a session for my child.
+
+Here's what I had in mind:
+
+Name: ${body.parentName || ''}
+Level: ${body.childLevel || ''}
+Subject: ${body.subject || ''}
+Best time: ${body.preferredTime || ''}
+My number: ${body.whatsapp || ''}
+
+I saw that the first session is free — I'd love to know how that works and what the next step looks like.`
     );
     const waUrl = `https://wa.me/254114628443?text=${waMessage}`;
 
