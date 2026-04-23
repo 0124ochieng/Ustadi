@@ -1,3 +1,9 @@
+// Always scroll to top on page load
+if (history.scrollRestoration) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 /* ============================================================
    MOBILE MENU
    ============================================================ */
