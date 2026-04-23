@@ -1,111 +1,161 @@
-const WEBHOOK_URL =
-  'https://n8n.ochieng.site/webhook/ustadi-booking';
-const TIMEOUT_MS = 8000;
+/* ── Toast notification ── */
+function showToast(message, type = 'success') {
+  const existing = document.querySelector(
+    '.booking-toast'
+  );
+  if (existing) existing.remove();
 
-async function submitToNetlify(formData) {
-  const body = new URLSearchParams(formData).toString();
-  const response = await fetch('/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: `form-name=ustadi-booking&${body}`
+  const toast = document.createElement('div');
+  toast.className = 'booking-toast';
+  toast.innerHTML = message;
+  document.body.appendChild(toast);
+
+  requestAnimationFrame(() => {
+    toast.classList.add('booking-toast--visible');
   });
-  return response;
+
+  setTimeout(() => {
+    toast.classList.remove('booking-toast--visible');
+    setTimeout(() => toast.remove(), 400);
+  }, 5000);
 }
 
-async function submitToN8n(body) {
-  const controller = new AbortController();
-  const timeout = setTimeout(
-    () => controller.abort(),
-    TIMEOUT_MS
+/* ── Form validation ── */
+const form = document.getElementById(
+  'booking-form-el'
+);
+if (form) {
+  const fields = form.querySelectorAll(
+    '.form-field[required]'
   );
-  try {
-    const response = await fetch(WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-      signal: controller.signal
+
+  // Mark field as touched on blur
+  fields.forEach(field => {
+    field.addEventListener('blur', () => {
+      field.classList.add('touched');
     });
-    clearTimeout(timeout);
-    return response;
-  } catch (err) {
-    clearTimeout(timeout);
-    throw err;
-  }
-}
+  });
 
-document.getElementById('booking-form-el')
-  .addEventListener('submit', async (e) => {
-  e.preventDefault();
+  /* ── Form submission ── */
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-  const btn = e.target.querySelector(
-    'button[type="submit"]'
-  );
-  const originalText = btn.textContent;
+    // Validate all fields
+    let valid = true;
+    fields.forEach(field => {
+      field.classList.add('touched');
+      if (!field.value || field.value === '') {
+        valid = false;
+      }
+    });
 
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-  btn.style.opacity = '0.8';
-
-  const data = new FormData(e.target);
-  const body = Object.fromEntries(data.entries());
-
-  let submitted = false;
-
-  // Attempt 1 — n8n primary
-  try {
-    const response = await submitToN8n(body);
-    if (response.ok || response.status === 200) {
-      submitted = true;
-      console.log('Submitted via n8n');
+    if (!valid) {
+      // Scroll to first invalid field
+      const first = form.querySelector(
+        '.form-field.touched:invalid'
+      );
+      if (first) {
+        first.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+        first.focus();
+      }
+      return;
     }
-  } catch (err) {
-    console.log('n8n unavailable — trying fallback');
-  }
 
-  // Attempt 2 — Netlify fallback
-  if (!submitted) {
-    try {
-      await submitToNetlify(body);
-      submitted = true;
-      console.log('Submitted via Netlify fallback');
-    } catch (err) {
-      console.log('Both submission methods failed');
-    }
-  }
-
-  // Show result to user
-  if (submitted) {
-    btn.textContent = 'Booking Received ✓';
-    btn.style.background = '#10b981';
-    btn.style.color = '#ffffff';
-    btn.style.opacity = '1';
-    e.target.reset();
-
-    setTimeout(() => {
-      btn.textContent = originalText;
-      btn.style.background = '';
-      btn.style.color = '';
-      btn.disabled = false;
-    }, 4000);
-
-  } else {
-    // Both failed — open WhatsApp with pre-filled message
-    const name = body.parentName || '';
-    const subject = body.subject || '';
-    const message = encodeURIComponent(
-      `Hello Ustadi Learning, I would like to book a session.\n\nName: ${name}\nSubject: ${subject}`
+    const btn = form.querySelector(
+      'button[type="submit"]'
     );
-    const whatsappUrl =
-      `https://wa.me/254114628443?text=${message}`;
+    const originalText = btn.textContent;
+    const originalBg = btn.style.background;
 
-    btn.textContent = 'Continue on WhatsApp →';
-    btn.style.background = '#25d366';
-    btn.style.color = '#ffffff';
-    btn.style.opacity = '1';
-    btn.disabled = false;
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    btn.style.opacity = '0.8';
 
-    btn.onclick = () => window.open(whatsappUrl, '_blank');
-  }
-});
+    const data = new FormData(form);
+    const body = Object.fromEntries(data.entries());
+
+    // Build WhatsApp fallback message
+    const waMessage = encodeURIComponent(
+      `Hello Ustadi Learning,\n\nI would like to book a session.\n\nName: ${body.parentName || ''}\nChild Level: ${body.childLevel || ''}\nSubject: ${body.subject || ''}\nPreferred Time: ${body.preferredTime || ''}\nWhatsApp: ${body.whatsapp || ''}\n\nPlease confirm my booking. Thank you.`
+    );
+    const waUrl = `https://wa.me/254114628443?text=${waMessage}`;
+
+    let submitted = false;
+
+    // Try n8n with 3 second timeout
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(
+        () => controller.abort(), 3000
+      );
+
+      const response = await fetch(
+        'https://n8n.ochieng.site/webhook/ustadi-booking',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(body),
+          signal: controller.signal
+        }
+      );
+
+      clearTimeout(timeout);
+
+      if (response.ok || response.status === 200) {
+        submitted = true;
+      }
+    } catch (err) {
+      // n8n offline or timed out — use WhatsApp
+      console.log('n8n unavailable — using WhatsApp');
+    }
+
+    if (submitted) {
+      // Success — show toast + reset
+      btn.textContent = 'Booking Received ✓';
+      btn.style.background = '#2d6a4f';
+      btn.style.color = 'rgb(239, 233, 221)';
+      btn.style.opacity = '1';
+
+      showToast(
+        'Booking received. We will contact you within the hour.'
+      );
+
+      form.reset();
+
+      // Remove touched classes
+      fields.forEach(f => f.classList.remove('touched'));
+
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.disabled = false;
+      }, 4000);
+
+    } else {
+      // n8n offline — WhatsApp fallback
+      btn.textContent = 'Continue on WhatsApp →';
+      btn.style.background = '#25d366';
+      btn.style.color = '#ffffff';
+      btn.style.opacity = '1';
+      btn.disabled = false;
+
+      btn.onclick = (e) => {
+        e.preventDefault();
+        window.open(waUrl, '_blank');
+        // Reset button after opening WA
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = '';
+          btn.style.color = '';
+          btn.onclick = null;
+        }, 3000);
+      };
+    }
+  });
+}
