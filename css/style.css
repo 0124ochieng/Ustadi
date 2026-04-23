@@ -4,13 +4,17 @@
 
 :root {
   /* Colour tokens */
-  --navy: #00031a;
-  --navy-surface: #0a0f2e;
-  --cream: #fffef4;
-  --white: #ffffff;
-  --muted: #8892b0;
-  --border-dark: rgba(255, 255, 255, 0.08);
-  --border-light: rgba(0, 3, 26, 0.08);
+  --navy: #1f2a2e;
+  --navy-surface: #263338;
+  --cream: rgb(239, 233, 221);
+  --cream-dark: rgb(229, 221, 207);
+  --white: rgb(239, 233, 221);
+  --muted: #c9bfa8;
+  --text-primary: #1f2a2e;
+  --text-secondary: #4a5568;
+  --border-dark: rgba(239, 233, 221, 0.08);
+  --border-light: rgba(31, 42, 46, 0.10);
+  --accent: #8b6914;
 
   /* Typography */
   --font-display: 'Plus Jakarta Sans', sans-serif;
@@ -163,6 +167,17 @@ textarea {
   font-family: var(--font-display);
   font-size: 16px;
   font-weight: 600;
+}
+
+/* Muted / secondary text on dark backgrounds */
+.muted,
+.label,
+.caption,
+.why__card-body,
+.hiw__step-body,
+.trust__sub,
+.faq__sub {
+  color: #c9bfa8;
 }
 
 /* ============================================================
@@ -811,129 +826,162 @@ textarea {
    ============================================================ */
 
 .why-ustadi {
-  padding: 64px 0;
+  padding: var(--space-7) 0;
+  background-color: var(--navy);
+}
+
+.why__header {
+  margin-bottom: 48px;
 }
 
 .why__label {
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  color: #c9bfa8;
 }
 
 .why__headline {
-  color: var(--white);
-  margin-bottom: 8px;
+  color: rgb(239, 233, 221);
+  max-width: 640px;
+  line-height: 1.25;
 }
 
-.why__sub {
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.5;
-  margin-bottom: 32px;
-}
-
-.why__cards {
+/* Two-column editorial layout */
+.why__columns {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-bottom: 40px;
+  gap: 0;
+  border-top: 1px solid rgba(239, 233, 221, 0.12);
 }
 
-.why__card-icon {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
+.why__col {
+  flex: 1;
+  padding: 40px 0;
+  border-bottom: 1px solid rgba(239, 233, 221, 0.12);
+}
+
+/* Eyebrow — italic warm label */
+.why__col-eyebrow {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-style: italic;
+  color: #c9bfa8;
   margin-bottom: 12px;
+  letter-spacing: 0.01em;
 }
 
-.why__card-title {
-  color: var(--white);
-  margin-bottom: 8px;
+.why__col-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: rgb(239, 233, 221);
+  margin-bottom: 16px;
+  line-height: 1.25;
 }
 
-.why__card-body {
+.why__col-body {
   font-family: var(--font-body);
   font-size: 14px;
-  color: var(--muted);
-  line-height: 1.6;
+  color: #c9bfa8;
+  line-height: 1.75;
+  margin-bottom: 0;
+}
+
+.why__divider-line {
+  height: 1px;
+  background: rgba(239, 233, 221, 0.10);
+  margin: 32px 0;
+}
+
+/* Definition list — dotted separator rows */
+.why__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.why__list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px dashed rgba(239, 233, 221, 0.12);
+  gap: 16px;
+}
+
+.why__list-item:last-child {
+  border-bottom: none;
+}
+
+.why__list-item dt {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #c9bfa8;
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+.why__list-item dd {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: rgb(239, 233, 221);
+  text-align: right;
+  margin: 0;
 }
 
 /* Founder note */
-.why__divider {
-  height: 1px;
-  background: var(--border-dark);
-  margin-bottom: 32px;
+.why__founder {
+  padding-top: 40px;
+  border-top: 1px solid rgba(239, 233, 221, 0.08);
+  margin-top: 8px;
 }
 
-.why__founder-label {
-  display: block;
-  margin-bottom: 12px;
-}
-
-.why__quote {
+.why__founder-note {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 14px;
   font-style: italic;
-  font-weight: 400;
-  color: rgba(255, 255, 254, 0.85);
-  line-height: 1.7;
-  margin-bottom: 12px;
+  color: rgba(239, 233, 221, 0.45);
+  text-align: center;
+  letter-spacing: 0.01em;
 }
 
-.why__attribution {
-  font-family: var(--font-body);
-  font-size: 13px;
-  color: var(--muted);
-}
-
-/* Why Ustadi — desktop hover interactions */
-.why__card {
-  transition: transform 0.3s cubic-bezier(0.34, 1.3, 0.64, 1),
-              box-shadow 0.3s ease,
-              opacity 0.3s ease,
-              border-left-color 0.3s ease;
-  will-change: transform;
-}
-
-.why__cards:has(.why__card:hover) .why__card {
-  opacity: 0.65;
-  transform: scale(0.98);
-}
-
-.why__cards:has(.why__card:hover) .why__card:hover {
-  opacity: 1;
-  transform: scale(1.03) translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0,3,26,0.35),
-              0 0 0 1px rgba(255,254,244,0.08);
-  border-left-color: rgba(255,254,244,0.6);
-}
-
-.why__card:hover .why__card-icon {
-  transform: scale(1.1);
-  transition: transform 0.3s ease;
-}
-
-.why__card:hover .why__card-title {
-  color: #ffffff;
-  transition: color 0.2s ease;
-}
-
-/* Why Ustadi — mobile scroll focus */
-@media (max-width: 767px) {
-  .why__card {
-    opacity: 0.75;
-    transform: scale(0.97);
-    transition: transform 0.4s ease,
-                opacity 0.4s ease,
-                box-shadow 0.4s ease,
-                border-left-color 0.3s ease;
+@media (min-width: 768px) {
+  .why__columns {
+    flex-direction: row;
   }
 
-  .why__card.in-focus {
-    opacity: 1;
-    transform: scale(1.02);
-    box-shadow: 0 8px 32px rgba(0,3,26,0.4),
-                0 0 0 1px rgba(255,254,244,0.06);
-    border-left-color: rgba(255,254,244,0.5);
+  .why__col {
+    padding: 48px 48px 48px 0;
+    border-bottom: none;
+    border-right: 1px solid rgba(239, 233, 221, 0.12);
+  }
+
+  .why__col:last-child {
+    padding: 48px 0 48px 48px;
+    border-right: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .why__header {
+    margin-bottom: 0;
+  }
+
+  .why__col {
+    padding: 64px 80px 64px 0;
+  }
+
+  .why__col:last-child {
+    padding: 64px 0 64px 80px;
+  }
+
+  .why__headline {
+    font-size: 36px;
+  }
+
+  .why__col-title {
+    font-size: 28px;
   }
 }
 
@@ -2005,37 +2053,6 @@ textarea {
 
   .hero__image {
     height: 560px;
-  }
-
-  /* Why Ustadi */
-  .why__headline {
-    margin-bottom: 16px;
-  }
-
-  .why__sub {
-    margin-bottom: 64px;
-  }
-
-  .why__cards {
-    gap: 32px;
-  }
-
-  .why__card {
-    padding: 32px;
-    gap: 16px;
-  }
-
-  .why__founder {
-    margin-top: 80px;
-  }
-
-  .why__divider {
-    margin-bottom: 48px;
-  }
-
-  .why__quote {
-    font-size: 17px;
-    max-width: 640px;
   }
 
   /* How It Works */
