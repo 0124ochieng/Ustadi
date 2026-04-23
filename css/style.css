@@ -801,9 +801,9 @@ textarea {
 
 /* The rotating word container */
 .hero__rotate-wrap {
-  display: inline-block;
+  display: block;
   position: relative;
-  min-width: 120px;
+  padding-top: 4px;
 }
 
 .hero__rotate {
@@ -813,6 +813,12 @@ textarea {
   transition: opacity 0.5s ease,
               transform 0.5s ease;
   transform: translateY(0);
+  min-width: 0;
+}
+
+.hero__rotate-static {
+  display: inline-block;
+  color: rgb(239, 233, 221);
 }
 
 /* Fade out state */
@@ -862,9 +868,6 @@ textarea {
     font-size: 56px;
     margin-bottom: 32px;
   }
-  .hero__rotate-wrap {
-    min-width: 160px;
-  }
 }
 
 @media (min-width: 1024px) {
@@ -877,9 +880,6 @@ textarea {
   }
   .hero__content {
     max-width: 760px;
-  }
-  .hero__rotate-wrap {
-    min-width: 200px;
   }
 }
 
