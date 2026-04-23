@@ -38,52 +38,112 @@ if (hamburger && mobileMenu && closeMenuBtn) {
 }
 
 /* ============================================================
-   NAVBAR — scroll shadow
+   NAVBAR — scroll state
    ============================================================ */
 
 const navbar = document.querySelector('.navbar');
 
 if (navbar) {
   window.addEventListener('scroll', () => {
-    navbar.style.boxShadow = window.scrollY > 10
-      ? '0 2px 20px rgba(0,3,26,0.4)'
-      : 'none';
+    if (window.scrollY > 20) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
   }, { passive: true });
 }
 
 /* ============================================================
-   SCROLL ANIMATIONS — Intersection Observer
+   UNIVERSAL BIDIRECTIONAL SCROLL ANIMATION SYSTEM
    ============================================================ */
 
-const animObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      animObserver.unobserve(entry.target);
+(function() {
+
+  const animatables = document.querySelectorAll(
+    '.animate, .faq-item, .why__point'
+  );
+  if (!animatables.length) return;
+
+  // Set initial state for non-why__point elements
+  animatables.forEach(el => {
+    if (!el.classList.contains('why__point')) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(28px)';
+      el.style.transition =
+        'opacity 0.65s ease, transform 0.65s ease';
     }
   });
-}, { threshold: 0.1 });
 
-document.querySelectorAll('.animate').forEach(el => animObserver.observe(el));
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        const el = entry.target;
+        const rect = el.getBoundingClientRect();
 
-/* ============================================================
-   FAQ — staggered scroll entrance
-   ============================================================ */
-
-const faqObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in-view');
+        if (entry.isIntersecting) {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+          el.classList.add('in-view');
+          if (el.classList.contains('why__point')) {
+            el.classList.add('revealed');
+            el.classList.remove('fading-past');
+          }
+        } else {
+          if (rect.top < 0) {
+            // Scrolled past — exit upward
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(-20px)';
+            el.classList.remove('in-view');
+            if (el.classList.contains('why__point')) {
+              el.classList.add('fading-past');
+              el.classList.remove('revealed');
+            }
+          } else {
+            // Below viewport — reset to base
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(28px)';
+            el.classList.remove('in-view');
+            if (el.classList.contains('why__point')) {
+              el.classList.remove('revealed', 'fading-past');
+            }
+          }
+        }
+      });
+    },
+    {
+      threshold: 0.12,
+      rootMargin: '0px 0px -8% 0px'
     }
-  });
-}, {
-  threshold: 0.1,
-  rootMargin: '0px 0px -40px 0px'
-});
+  );
 
-document.querySelectorAll('.faq-item').forEach(item => {
-  faqObserver.observe(item);
-});
+  animatables.forEach(el => {
+    const parent = el.parentElement;
+    if (parent) {
+      const siblings = Array.from(
+        parent.querySelectorAll(
+          ':scope > .animate, :scope > .why__point'
+        )
+      );
+      const idx = siblings.indexOf(el);
+      if (idx > 0) {
+        el.style.transitionDelay = `${idx * 0.08}s`;
+      }
+    }
+    observer.observe(el);
+  });
+
+  // Reset delay after animation so re-entry feels fresh
+  animatables.forEach(el => {
+    el.addEventListener('transitionend', () => {
+      if (el.style.opacity === '1') {
+        setTimeout(() => {
+          el.style.transitionDelay = '0s';
+        }, 100);
+      }
+    });
+  });
+
+})();
 
 /* ============================================================
    FAQ — accordion with micro-interactions
@@ -324,44 +384,3 @@ window.addEventListener('resize', () => {
   }
 });
 
-/* ── Why Ustadi scroll reveal ── */
-(function() {
-
-  const points = document.querySelectorAll(
-    '.why__point'
-  );
-  if (!points.length) return;
-
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          entry.target.classList.remove('fading-past');
-        } else {
-          const rect = entry.target
-            .getBoundingClientRect();
-          if (rect.top < 0) {
-            // Above viewport — fade out upward
-            entry.target.classList.add('fading-past');
-            entry.target.classList.remove('revealed');
-          } else {
-            // Below viewport — reset to base
-            entry.target.classList.remove(
-              'revealed', 'fading-past'
-            );
-          }
-        }
-      });
-    },
-    {
-      threshold: 0.25,
-      rootMargin: '0px 0px -10% 0px'
-    }
-  );
-
-  points.forEach(point => {
-    revealObserver.observe(point);
-  });
-
-})();

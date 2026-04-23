@@ -137,6 +137,7 @@ textarea {
   font-size: 28px;
   font-weight: 700;
   line-height: 1.2;
+  margin-bottom: 20px;
 }
 
 /* Sub-headline */
@@ -145,6 +146,7 @@ textarea {
   font-size: 16px;
   font-weight: 400;
   line-height: 1.6;
+  margin-bottom: 56px;
 }
 
 /* Body text */
@@ -544,12 +546,20 @@ textarea {
    ============================================================ */
 
 .navbar {
-  background-color: var(--navy);
-  border-bottom: 1px solid var(--border-dark);
+  background-color: rgba(31, 42, 46, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(239, 233, 221, 0.06);
   position: sticky;
   top: 0;
   z-index: 1000;
-  transition: box-shadow 0.2s ease;
+  transition: background-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.navbar.scrolled {
+  background-color: rgba(31, 42, 46, 0.85);
+  box-shadow: 0 1px 40px rgba(0, 0, 0, 0.2);
 }
 
 .navbar__inner {
@@ -793,10 +803,10 @@ textarea {
 
 .hero__headline {
   font-family: var(--font-display);
-  font-size: 44px;
+  font-size: 36px;
   font-weight: 700;
   line-height: 1.15;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
   background: linear-gradient(
     135deg,
     rgb(239, 233, 221) 0%,
@@ -807,6 +817,16 @@ textarea {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: fadeUp 0.7s ease 0.2s both;
+  text-align: center;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 480px) {
+  .hero__headline {
+    font-size: 42px;
+  }
 }
 
 .hero__sub {
@@ -841,18 +861,44 @@ textarea {
 
 @media (min-width: 768px) {
   .hero__headline {
-    font-size: 56px;
+    font-size: 52px;
   }
 }
 
 @media (min-width: 1024px) {
   .hero__headline {
-    font-size: 64px;
+    font-size: 60px;
     line-height: 1.1;
   }
   .hero__content {
     max-width: 760px;
   }
+}
+
+/* ============================================================
+   SECTION HEADING SPACING
+   ============================================================ */
+
+.why__headline { margin-bottom: 64px; }
+.hiw__headline { margin-bottom: 16px; }
+.hiw__sub { margin-bottom: 80px; }
+.services__headline { margin-bottom: 16px; }
+.services__sub { margin-bottom: 72px; }
+.trust__headline { margin-bottom: 16px; }
+.trust__sub { margin-bottom: 72px; }
+.faq__headline { margin-bottom: 16px; }
+.faq__sub { margin-bottom: 64px; }
+.booking__headline { margin-bottom: 20px; }
+.booking__sub { margin-bottom: 64px; }
+
+@media (min-width: 1024px) {
+  .sub-headline { margin-bottom: 72px; }
+  .why__headline { margin-bottom: 80px; }
+  .hiw__sub { margin-bottom: 96px; }
+  .services__sub { margin-bottom: 88px; }
+  .trust__sub { margin-bottom: 88px; }
+  .faq__sub { margin-bottom: 80px; }
+  .booking__sub { margin-bottom: 80px; }
 }
 
 /* ============================================================
@@ -929,19 +975,22 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 0;
+  max-width: 640px;
+  margin: 0 auto;
 }
 
 /* Base state — invisible, shifted down */
 .why__point {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 36px 0;
+  border-top: 1px solid rgba(239, 233, 221, 0.08);
+  text-align: left;
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.7s ease,
               transform 0.7s ease;
-  padding: 32px 0;
-  border-top: 1px solid rgba(239, 233, 221, 0.08);
-  display: flex;
-  align-items: flex-start;
-  gap: 24px;
   will-change: opacity, transform;
 }
 
@@ -1006,7 +1055,9 @@ textarea {
 
 /* Founder note */
 .why__note {
-  margin-top: 48px;
+  max-width: 640px;
+  margin: 48px auto 0;
+  text-align: center;
 }
 
 .why__note-text {
@@ -1785,142 +1836,102 @@ textarea {
 
 /* FAQ contact section */
 .faq__contact {
-  margin-top: 48px;
-  padding-top: 40px;
-  border-top: 1px solid rgba(31, 42, 46, 0.08);
-}
-
-.faq__contact-intro {
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: rgba(31, 42, 46, 0.5);
+  margin-top: 64px;
   text-align: center;
-  margin-bottom: 24px;
-  line-height: 1.6;
 }
 
-/* Always one row — side by side */
-.faq__contact-options {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  border: 1px solid rgba(31, 42, 46, 0.1);
-  border-radius: 10px;
-  overflow: hidden;
-  max-width: 480px;
-  margin: 0 auto;
+.faq__contact-headline {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2a2e;
+  margin-bottom: 32px;
 }
 
-.faq__contact-option {
-  flex: 1;
+.faq__contact-row {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 12px;
-  padding: 16px 20px;
-  background: rgb(239, 233, 221);
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.faq__contact-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 28px;
   text-decoration: none;
-  transition: background 0.2s ease;
+  border: 1px solid rgba(31, 42, 46, 0.1);
+  border-radius: 10px;
+  background: transparent;
+  transition: background 0.2s ease,
+              border-color 0.2s ease,
+              transform 0.2s ease;
+  text-align: left;
 }
 
-.faq__contact-option:hover {
-  background: rgb(229, 221, 207);
+.faq__contact-item:hover {
+  background: rgba(31, 42, 46, 0.04);
+  border-color: rgba(31, 42, 46, 0.2);
+  transform: translateY(-2px);
 }
 
-/* Vertical divider between options */
-.faq__contact-divider {
-  width: 1px;
-  background: rgba(31, 42, 46, 0.08);
-  flex-shrink: 0;
-}
-
-/* Icon circle */
-.faq__contact-icon-wrap {
-  width: 36px;
-  height: 36px;
+.faq__contact-icon {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: rgba(31, 42, 46, 0.08);
+  background: rgba(31, 42, 46, 0.06);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.faq__contact-icon-wrap i {
-  font-size: 18px;
+.faq__contact-icon i {
+  font-size: 20px;
   color: #1f2a2e;
 }
 
-/* WhatsApp icon — green tint */
-.faq__contact-icon-wrap--wa {
-  background: rgba(37, 211, 102, 0.12);
+.faq__contact-icon--wa {
+  background: rgba(37, 211, 102, 0.1);
 }
 
-.faq__contact-icon-wrap--wa i {
+.faq__contact-icon--wa i {
   color: #128c4a;
 }
 
-.faq__contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.faq__contact-label {
+.faq__contact-type {
+  display: block;
   font-family: var(--font-display);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: #1f2a2e;
-  white-space: nowrap;
+  margin-bottom: 2px;
 }
 
-.faq__contact-sub {
+.faq__contact-detail {
+  display: block;
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 12px;
   color: rgba(31, 42, 46, 0.45);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-@media (max-width: 360px) {
-  .faq__contact-option {
-    padding: 14px 12px;
-    gap: 8px;
-  }
-  .faq__contact-icon-wrap {
-    width: 30px;
-    height: 30px;
-  }
-  .faq__contact-icon-wrap i {
-    font-size: 15px;
-  }
-  .faq__contact-label {
-    font-size: 13px;
-  }
-  .faq__contact-sub {
-    font-size: 10px;
-  }
+.faq__contact-separator {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: rgba(31, 42, 46, 0.3);
+  font-style: italic;
 }
 
-@media (min-width: 768px) {
-  .faq__contact-option {
-    padding: 20px 28px;
-    gap: 16px;
+@media (max-width: 480px) {
+  .faq__contact-row {
+    flex-direction: column;
+    align-items: stretch;
   }
-  .faq__contact-icon-wrap {
-    width: 40px;
-    height: 40px;
-  }
-  .faq__contact-icon-wrap i {
-    font-size: 20px;
-  }
-  .faq__contact-label {
-    font-size: 15px;
-  }
-  .faq__contact-sub {
-    font-size: 12px;
+  .faq__contact-separator {
+    text-align: center;
   }
 }
 
