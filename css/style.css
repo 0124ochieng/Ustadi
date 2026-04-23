@@ -1542,11 +1542,6 @@ textarea {
 
 /* Divider + transition between halves */
 .trust__divider-wrap {
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(10, 15, 18, 0.3) 100%
-  );
   padding: 64px 0 48px;
 }
 
@@ -1570,12 +1565,7 @@ textarea {
    ============================================================ */
 
 .booking {
-  background: linear-gradient(
-    180deg,
-    #1f2a2e 0%,
-    #192228 40%,
-    #141c20 100%
-  );
+  background: #1f2a2e;
   padding-bottom: var(--space-7);
 }
 
@@ -1756,33 +1746,31 @@ textarea {
 .faq__contact-intro {
   font-family: var(--font-body);
   font-size: 14px;
-  color: rgba(31, 42, 46, 0.55);
+  color: rgba(31, 42, 46, 0.5);
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   line-height: 1.6;
 }
 
+/* Always one row — side by side */
 .faq__contact-options {
   display: flex;
-  flex-direction: column;
-  gap: 1px;
-  background: rgba(31, 42, 46, 0.08);
-  border-radius: 8px;
+  flex-direction: row;
+  align-items: stretch;
+  border: 1px solid rgba(31, 42, 46, 0.1);
+  border-radius: 10px;
   overflow: hidden;
-}
-
-@media (min-width: 640px) {
-  .faq__contact-options {
-    flex-direction: row;
-  }
+  max-width: 480px;
+  margin: 0 auto;
 }
 
 .faq__contact-option {
   flex: 1;
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 20px 24px;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
   background: rgb(239, 233, 221);
   text-decoration: none;
   transition: background 0.2s ease;
@@ -1792,28 +1780,101 @@ textarea {
   background: rgb(229, 221, 207);
 }
 
-.faq__contact-label {
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: rgba(31, 42, 46, 0.4);
+/* Vertical divider between options */
+.faq__contact-divider {
+  width: 1px;
+  background: rgba(31, 42, 46, 0.08);
+  flex-shrink: 0;
 }
 
-.faq__contact-value {
-  font-family: var(--font-display);
+/* Icon circle */
+.faq__contact-icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(31, 42, 46, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.faq__contact-icon-wrap i {
   font-size: 18px;
-  font-weight: 700;
   color: #1f2a2e;
-  letter-spacing: 0.01em;
+}
+
+/* WhatsApp icon — green tint */
+.faq__contact-icon-wrap--wa {
+  background: rgba(37, 211, 102, 0.12);
+}
+
+.faq__contact-icon-wrap--wa i {
+  color: #128c4a;
+}
+
+.faq__contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.faq__contact-label {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2a2e;
+  white-space: nowrap;
 }
 
 .faq__contact-sub {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 11px;
   color: rgba(31, 42, 46, 0.45);
-  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 360px) {
+  .faq__contact-option {
+    padding: 14px 12px;
+    gap: 8px;
+  }
+  .faq__contact-icon-wrap {
+    width: 30px;
+    height: 30px;
+  }
+  .faq__contact-icon-wrap i {
+    font-size: 15px;
+  }
+  .faq__contact-label {
+    font-size: 13px;
+  }
+  .faq__contact-sub {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .faq__contact-option {
+    padding: 20px 28px;
+    gap: 16px;
+  }
+  .faq__contact-icon-wrap {
+    width: 40px;
+    height: 40px;
+  }
+  .faq__contact-icon-wrap i {
+    font-size: 20px;
+  }
+  .faq__contact-label {
+    font-size: 15px;
+  }
+  .faq__contact-sub {
+    font-size: 12px;
+  }
 }
 
 /* ============================================================
@@ -1846,10 +1907,10 @@ textarea {
   font-size: 11px;
   font-weight: 400;
   color: rgba(239, 233, 221, 0.35);
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   margin-bottom: 48px;
-  max-width: 160px;
+  white-space: nowrap;
   text-align: center;
 }
 
@@ -2336,9 +2397,8 @@ textarea {
   }
 
   .footer__tagline {
-    max-width: 185px;
     font-size: 10px;
-    letter-spacing: 0.28em;
+    letter-spacing: 0.24em;
   }
 
   .footer__middle {
