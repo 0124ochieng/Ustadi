@@ -1,34 +1,3 @@
-/* ── Reveal body (paired with visibility:hidden in <style>) ── */
-document.addEventListener('DOMContentLoaded', () => {
-  document.body.style.visibility = 'visible';
-});
-
-/* ── Splash screen ── */
-(function() {
-  const splash = document.getElementById('splash');
-  if (!splash) return;
-
-  // Only show once per session
-  if (sessionStorage.getItem('splashShown')) {
-    splash.classList.add('gone');
-    return;
-  }
-
-  sessionStorage.setItem('splashShown', '1');
-
-  function dismiss() {
-    splash.classList.add('hidden');
-    setTimeout(() => splash.classList.add('gone'), 750);
-  }
-
-  if (document.readyState === 'complete') {
-    setTimeout(dismiss, 1200);
-  } else {
-    window.addEventListener('load', () => setTimeout(dismiss, 1200));
-    setTimeout(dismiss, 2200); // hard safety timeout
-  }
-})();
-
 /* ============================================================
    MOBILE MENU
    ============================================================ */
@@ -55,12 +24,10 @@ if (hamburger && mobileMenu && closeMenuBtn) {
   hamburger.addEventListener('click', openMenu);
   closeMenuBtn.addEventListener('click', closeMenu);
 
-  // Close on any nav link tap
   mobileMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', closeMenu);
   });
 
-  // Close on Escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
       closeMenu();
@@ -76,32 +43,23 @@ const navbar = document.querySelector('.navbar');
 
 if (navbar) {
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
   }, { passive: true });
 }
 
 /* ============================================================
-   UNIVERSAL BIDIRECTIONAL SCROLL ANIMATION SYSTEM
+   SCROLL ANIMATIONS (bidirectional — do not unobserve)
    ============================================================ */
 
 (function() {
-
-  const animatables = document.querySelectorAll(
-    '.animate, .faq-item, .why__point'
-  );
+  const animatables = document.querySelectorAll('.animate, .faq-item, .why__point');
   if (!animatables.length) return;
 
-  // Set initial state for non-why__point elements
   animatables.forEach(el => {
     if (!el.classList.contains('why__point')) {
       el.style.opacity = '0';
       el.style.transform = 'translateY(28px)';
-      el.style.transition =
-        'opacity 0.65s ease, transform 0.65s ease';
+      el.style.transition = 'opacity 0.65s ease, transform 0.65s ease';
     }
   });
 
@@ -121,7 +79,6 @@ if (navbar) {
           }
         } else {
           if (rect.top < 0) {
-            // Scrolled past — exit upward
             el.style.opacity = '0';
             el.style.transform = 'translateY(-20px)';
             el.classList.remove('in-view');
@@ -130,7 +87,6 @@ if (navbar) {
               el.classList.remove('revealed');
             }
           } else {
-            // Below viewport — reset to base
             el.style.opacity = '0';
             el.style.transform = 'translateY(28px)';
             el.classList.remove('in-view');
@@ -141,84 +97,59 @@ if (navbar) {
         }
       });
     },
-    {
-      threshold: 0.12,
-      rootMargin: '0px 0px -8% 0px'
-    }
+    { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
   );
 
   animatables.forEach(el => {
     const parent = el.parentElement;
     if (parent) {
       const siblings = Array.from(
-        parent.querySelectorAll(
-          ':scope > .animate, :scope > .why__point'
-        )
+        parent.querySelectorAll(':scope > .animate, :scope > .why__point')
       );
       const idx = siblings.indexOf(el);
-      if (idx > 0) {
-        el.style.transitionDelay = `${idx * 0.08}s`;
-      }
+      if (idx > 0) el.style.transitionDelay = `${idx * 0.08}s`;
     }
     observer.observe(el);
   });
 
-  // Reset delay after animation so re-entry feels fresh
   animatables.forEach(el => {
     el.addEventListener('transitionend', () => {
       if (el.style.opacity === '1') {
-        setTimeout(() => {
-          el.style.transitionDelay = '0s';
-        }, 100);
+        setTimeout(() => { el.style.transitionDelay = '0s'; }, 100);
       }
     });
   });
-
 })();
 
 /* ============================================================
-   FAQ — accordion with micro-interactions
+   FAQ ACCORDION
    ============================================================ */
 
 document.querySelectorAll('.faq-question').forEach(question => {
   const item = question.parentElement;
 
-  // Click — open / close
   question.addEventListener('click', () => {
     const isOpen = item.classList.contains('open');
-
-    // Close all items
     document.querySelectorAll('.faq-item').forEach(i => {
       i.classList.remove('open');
       i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
     });
-
-    // Open clicked item if it was closed
     if (!isOpen) {
       item.classList.add('open');
       question.setAttribute('aria-expanded', 'true');
     }
   });
 
-  // Subtle press on mousedown
-  question.addEventListener('mousedown', () => {
-    question.style.transform = 'scale(0.99)';
-  });
-
-  question.addEventListener('mouseup', () => {
-    question.style.transform = '';
-  });
-
-  question.addEventListener('mouseleave', () => {
-    question.style.transform = '';
-  });
+  question.addEventListener('mousedown', () => { question.style.transform = 'scale(0.99)'; });
+  question.addEventListener('mouseup', () => { question.style.transform = ''; });
+  question.addEventListener('mouseleave', () => { question.style.transform = ''; });
 });
 
 /* ============================================================
-   SERVICES CARDS — stage lighting + response panel
+   SERVICES CARDS — response panel
    ============================================================ */
 
-(function () {
+(function() {
   const grid = document.querySelector('.services__grid');
   const cards = document.querySelectorAll('.services__card');
   const responsePanel = document.querySelector('.response-panel');
@@ -227,13 +158,8 @@ document.querySelectorAll('.faq-question').forEach(question => {
   if (!grid || !cards.length) return;
 
   function showPanel(panelNumber) {
-    allPanels.forEach(p => {
-      p.hidden = true;
-      p.classList.remove('visible');
-    });
-    const target = document.querySelector(
-      `.panel-content[data-panel="${panelNumber}"]`
-    );
+    allPanels.forEach(p => { p.hidden = true; p.classList.remove('visible'); });
+    const target = document.querySelector(`.panel-content[data-panel="${panelNumber}"]`);
     if (target && responsePanel) {
       target.hidden = false;
       target.classList.add('visible');
@@ -245,27 +171,16 @@ document.querySelectorAll('.faq-question').forEach(question => {
   }
 
   function hidePanel() {
-    if (responsePanel) {
-      responsePanel.classList.remove('active');
-      setTimeout(() => {
-        allPanels.forEach(p => {
-          p.hidden = true;
-          p.classList.remove('visible');
-        });
-      }, 500);
-    }
-  }
-
-  function reset() {
-    cards.forEach(c => c.classList.remove('selected'));
-    grid.classList.remove('has-selection');
-    hidePanel();
+    if (!responsePanel) return;
+    responsePanel.classList.remove('active');
+    setTimeout(() => {
+      allPanels.forEach(p => { p.hidden = true; p.classList.remove('visible'); });
+    }, 500);
   }
 
   cards.forEach((card, index) => {
     card.addEventListener('click', () => {
       const isAlreadySelected = card.classList.contains('selected');
-
       cards.forEach(c => c.classList.remove('selected'));
       grid.classList.remove('has-selection');
 
@@ -287,16 +202,16 @@ document.querySelectorAll('.faq-question').forEach(question => {
   });
 
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('.services__card') &&
-        !e.target.closest('.response-panel')) {
-      reset();
+    if (!e.target.closest('.services__card') && !e.target.closest('.response-panel')) {
+      cards.forEach(c => c.classList.remove('selected'));
+      grid.classList.remove('has-selection');
+      hidePanel();
     }
   });
 
-  // Reset cards when services section leaves the viewport
   const servicesSection = document.querySelector('.services');
   if (servicesSection) {
-    const resetObserver = new IntersectionObserver(
+    new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
           if (!entry.isIntersecting) {
@@ -307,16 +222,15 @@ document.querySelectorAll('.faq-question').forEach(question => {
         });
       },
       { threshold: 0, rootMargin: '0px' }
-    );
-    resetObserver.observe(servicesSection);
+    ).observe(servicesSection);
   }
 })();
 
 /* ============================================================
-   TRUST BUBBLES — magnetic cursor effect (desktop only)
+   TRUST BUBBLES — magnetic cursor (desktop only)
    ============================================================ */
 
-(function () {
+(function() {
   if ('ontouchstart' in window) return;
 
   const bubbles = document.querySelectorAll('.trust__bubble');
@@ -327,19 +241,15 @@ document.querySelectorAll('.faq-question').forEach(question => {
 
   function applyMagnet(bubble, clientX, clientY) {
     const rect = bubble.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const distX = clientX - centerX;
-    const distY = clientY - centerY;
+    const distX = clientX - (rect.left + rect.width / 2);
+    const distY = clientY - (rect.top + rect.height / 2);
     const distance = Math.sqrt(distX * distX + distY * distY);
 
     if (distance < ACTIVATION_RADIUS) {
       const pull = (ACTIVATION_RADIUS - distance) / ACTIVATION_RADIUS;
-      const moveX = distX * pull * PULL_STRENGTH;
-      const moveY = distY * pull * PULL_STRENGTH;
       bubble.classList.add('magnetic');
       bubble.classList.remove('returning');
-      bubble.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      bubble.style.transform = `translate(${distX * pull * PULL_STRENGTH}px, ${distY * pull * PULL_STRENGTH}px)`;
       return true;
     }
     return false;
@@ -352,18 +262,11 @@ document.querySelectorAll('.faq-question').forEach(question => {
     setTimeout(() => bubble.classList.remove('returning'), 800);
   }
 
-  // Direct bubble mousemove — most precise
   bubbles.forEach(bubble => {
-    bubble.addEventListener('mousemove', (e) => {
-      applyMagnet(bubble, e.clientX, e.clientY);
-    });
-
-    bubble.addEventListener('mouseleave', () => {
-      releaseMagnet(bubble);
-    });
+    bubble.addEventListener('mousemove', (e) => applyMagnet(bubble, e.clientX, e.clientY));
+    bubble.addEventListener('mouseleave', () => releaseMagnet(bubble));
   });
 
-  // Container-level tracking — activates magnet before cursor lands on card
   const trustArea = document.querySelector('.trust-area');
   if (!trustArea) return;
 
@@ -371,47 +274,9 @@ document.querySelectorAll('.faq-question').forEach(question => {
     bubbles.forEach(bubble => {
       if (bubble.classList.contains('magnetic')) return;
       const activated = applyMagnet(bubble, e.clientX, e.clientY);
-      if (!activated && bubble.classList.contains('magnetic')) {
-        releaseMagnet(bubble);
-      }
+      if (!activated && bubble.classList.contains('magnetic')) releaseMagnet(bubble);
     });
   });
 
-  trustArea.addEventListener('mouseleave', () => {
-    bubbles.forEach(bubble => releaseMagnet(bubble));
-  });
+  trustArea.addEventListener('mouseleave', () => bubbles.forEach(releaseMagnet));
 })();
-
-/* ============================================================
-   WHY USTADI CARDS — scroll focus (mobile only)
-   ============================================================ */
-
-(function () {
-  if (window.innerWidth >= 768) return;
-
-  const whyCards = document.querySelectorAll('.why__card');
-  if (!whyCards.length) return;
-
-  const cardFocusObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-focus');
-        } else {
-          entry.target.classList.remove('in-focus');
-        }
-      });
-    },
-    { threshold: 0.55, rootMargin: '0px 0px -15% 0px' }
-  );
-
-  whyCards.forEach(card => cardFocusObserver.observe(card));
-})();
-
-window.addEventListener('resize', () => {
-  const whyCards = document.querySelectorAll('.why__card');
-  if (window.innerWidth >= 768) {
-    whyCards.forEach(c => c.classList.remove('in-focus'));
-  }
-});
-

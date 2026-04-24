@@ -1248,25 +1248,6 @@ textarea {
   line-height: 1.6;
 }
 
-/* Transition block */
-.hiw__transition {
-  margin-top: 48px;
-}
-
-.hiw__transition-divider {
-  height: 1px;
-  background: var(--border-dark);
-  margin-bottom: 32px;
-}
-
-.hiw__transition-text {
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-style: italic;
-  color: rgba(255, 255, 254, 0.5);
-  text-align: center;
-}
-
 /* ============================================================
    SERVICES SECTION
    ============================================================ */
@@ -1760,6 +1741,7 @@ textarea {
   padding: 120px 0;
   background-color: var(--cream);
   color: var(--navy);
+  contain: layout;
 }
 
 .faq__label {
@@ -1984,6 +1966,7 @@ textarea {
   color: var(--white);
   padding: 80px 0 40px;
   text-align: center;
+  contain: layout;
 }
 
 /* Brand block */
@@ -2304,10 +2287,6 @@ textarea {
     font-size: 15px;
   }
 
-  .hiw__transition {
-    margin-top: 80px;
-  }
-
   /* Services */
   .services__headline {
     margin-bottom: 16px;
@@ -2548,47 +2527,3 @@ textarea {
   }
 }
 
-/* ============================================================
-   SPLASH SCREEN
-   ============================================================ */
-
-.splash {
-  position: fixed;
-  inset: 0;
-  background: #021219;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 99999;
-  opacity: 1;
-  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: none;
-}
-
-.splash.hidden {
-  opacity: 0;
-}
-
-.splash.gone {
-  display: none;
-}
-
-.splash__logo {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  opacity: 0;
-  transform: scale(0.9);
-  animation: splashLogoIn 0.6s cubic-bezier(0.34, 1.2, 0.64, 1) 0.1s both;
-}
-
-@keyframes splashLogoIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}

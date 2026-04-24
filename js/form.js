@@ -120,8 +120,7 @@ I saw that the first session is free — I'd love to know how that works and wha
         submitted = true;
       }
     } catch (err) {
-      // n8n offline or timed out — use WhatsApp
-      console.log('n8n unavailable — using WhatsApp');
+      // n8n offline or timed out — falls through to WhatsApp
     }
 
     if (submitted) {
