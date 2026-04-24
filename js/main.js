@@ -1,3 +1,29 @@
+/* ── Splash screen ── */
+(function() {
+  const splash = document.getElementById('splash');
+  if (!splash) return;
+
+  // Only show once per session
+  if (sessionStorage.getItem('splashShown')) {
+    splash.classList.add('gone');
+    return;
+  }
+
+  sessionStorage.setItem('splashShown', '1');
+
+  const dismiss = () => {
+    splash.classList.add('hidden');
+    setTimeout(() => splash.classList.add('gone'), 650);
+  };
+
+  if (document.readyState === 'complete') {
+    setTimeout(dismiss, 1400);
+  } else {
+    window.addEventListener('load', () => setTimeout(dismiss, 1400));
+    setTimeout(dismiss, 2500); // safety fallback
+  }
+})();
+
 /* ============================================================
    MOBILE MENU
    ============================================================ */
