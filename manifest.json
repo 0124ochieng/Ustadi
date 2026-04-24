@@ -1,0 +1,17 @@
+{
+  "name": "Ustadi Learning",
+  "short_name": "Ustadi",
+  "description": "Expert private tutoring in Eldoret and East Africa",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#021219",
+  "theme_color": "#021219",
+  "icons": [
+    {
+      "src": "favicon.webp",
+      "sizes": "180x180",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ]
+}

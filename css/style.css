@@ -4,15 +4,15 @@
 
 :root {
   /* Colour tokens */
-  --navy: #1f2a2e;
-  --navy-surface: #263338;
+  --navy: #021219;
+  --navy-surface: #0a1a20;
   --cream: rgb(239, 233, 221);
   --cream-dark: rgb(229, 221, 207);
   --white: rgb(239, 233, 221);
   --muted: #c9bfa8;
   --text-primary: #1f2a2e;
   --text-secondary: #4a5568;
-  --border-dark: rgba(239, 233, 221, 0.08);
+  --border-dark: rgba(239, 233, 221, 0.10);
   --border-light: rgba(31, 42, 46, 0.10);
   --accent: #8b6914;
 
@@ -532,7 +532,7 @@ textarea {
   position: absolute;
   inset: 0;
   background-image: radial-gradient(
-    rgba(239, 233, 221, 0.06) 1px,
+    rgba(239, 233, 221, 0.07) 1px,
     transparent 1px
   );
   background-size: 24px 24px;
@@ -550,7 +550,7 @@ textarea {
    ============================================================ */
 
 .navbar {
-  background-color: rgba(31, 42, 46, 0.6);
+  background-color: rgba(2, 18, 25, 0.6);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(239, 233, 221, 0.06);
@@ -562,7 +562,7 @@ textarea {
 }
 
 .navbar.scrolled {
-  background-color: rgba(31, 42, 46, 0.85);
+  background-color: rgba(2, 18, 25, 0.85);
   box-shadow: 0 1px 40px rgba(0, 0, 0, 0.2);
 }
 
@@ -789,7 +789,7 @@ textarea {
 
 .hero {
   padding: 100px 0 120px;
-  background-color: #1f2a2e;
+  background-color: #021219;
 }
 
 .hero__content {
@@ -955,7 +955,7 @@ textarea {
 
 .why-ustadi {
   padding: 120px 0;
-  background-color: #1f2a2e;
+  background-color: #021219;
 }
 
 .why__header {
@@ -1006,6 +1006,10 @@ textarea {
 .why__point.revealed {
   opacity: 1;
   transform: translateY(0);
+}
+
+.why__point:hover {
+  border-top-color: rgba(239, 233, 221, 0.25);
 }
 
 /* Fading out — scrolled past */
@@ -1162,7 +1166,7 @@ textarea {
   font-family: var(--font-display);
   font-size: 72px;
   font-weight: 700;
-  color: rgba(255, 254, 244, 0.08);
+  color: rgba(239, 233, 221, 0.06);
   line-height: 1;
   user-select: none;
 }
@@ -1275,7 +1279,7 @@ textarea {
 }
 
 .services__card {
-  background: #263338;
+  background: #0a1a20;
   border: 1.5px solid transparent;
   border-radius: 12px;
   padding: 20px;
@@ -1303,7 +1307,7 @@ textarea {
 
 /* Ensure no blue appears on active/tap */
 .services__card:active {
-  background: #263338 !important;
+  background: #0a1a20 !important;
   outline: none !important;
 }
 
@@ -1312,7 +1316,7 @@ textarea {
   opacity: 0.45;
   filter: blur(0.4px);
   transform: scale(0.975);
-  background: #263338;
+  background: #0a1a20;
   box-shadow: none;
   border-color: transparent;
 }
@@ -1322,7 +1326,7 @@ textarea {
   opacity: 1;
   filter: none;
   transform: scale(1.03) translateY(-5px);
-  background: #2f4048;
+  background: #0d2028;
   border-color: rgba(239, 233, 221, 0.25);
   box-shadow:
     0 0 0 1px rgba(239, 233, 221, 0.06),
@@ -1597,8 +1601,8 @@ textarea {
 }
 
 .trust__bubble {
-  background: rgba(239, 233, 221, 0.06);
-  border: 1px solid rgba(239, 233, 221, 0.08);
+  background: rgba(239, 233, 221, 0.07);
+  border: 1px solid rgba(239, 233, 221, 0.10);
   border-radius: 12px;
   padding: 20px 24px;
   max-width: 72%;
@@ -1667,7 +1671,7 @@ textarea {
    ============================================================ */
 
 .booking {
-  background: #1f2a2e;
+  background: #021219;
   padding-bottom: var(--space-7);
 }
 
@@ -2482,7 +2486,7 @@ textarea {
   top: 80px;
   left: 50%;
   transform: translateX(-50%) translateY(-20px);
-  background: #1f2a2e;
+  background: #021219;
   color: rgb(239, 233, 221);
   font-family: var(--font-body);
   font-size: 14px;
