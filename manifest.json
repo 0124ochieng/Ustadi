@@ -8,7 +8,7 @@
   "theme_color": "#021219",
   "icons": [
     {
-      "src": "favicon.webp",
+      "src": "/favicon.webp",
       "sizes": "180x180",
       "type": "image/webp",
       "purpose": "any maskable"
