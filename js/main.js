@@ -1,3 +1,8 @@
+/* ── Reveal body (paired with visibility:hidden in <style>) ── */
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.style.visibility = 'visible';
+});
+
 /* ── Splash screen ── */
 (function() {
   const splash = document.getElementById('splash');
@@ -11,16 +16,16 @@
 
   sessionStorage.setItem('splashShown', '1');
 
-  const dismiss = () => {
+  function dismiss() {
     splash.classList.add('hidden');
-    setTimeout(() => splash.classList.add('gone'), 650);
-  };
+    setTimeout(() => splash.classList.add('gone'), 750);
+  }
 
   if (document.readyState === 'complete') {
-    setTimeout(dismiss, 1400);
+    setTimeout(dismiss, 1200);
   } else {
-    window.addEventListener('load', () => setTimeout(dismiss, 1400));
-    setTimeout(dismiss, 2500); // safety fallback
+    window.addEventListener('load', () => setTimeout(dismiss, 1200));
+    setTimeout(dismiss, 2200); // hard safety timeout
   }
 })();
 

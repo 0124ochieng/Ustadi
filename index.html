@@ -195,37 +195,22 @@
 
 
 
-  <!-- Critical inline CSS — above fold only -->
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{background-color:#021219;color:rgb(239,233,221);font-family:'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
-    .navbar{background-color:rgba(2,18,25,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);position:sticky;top:0;z-index:1000;height:64px}
-    .navbar__inner{display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:64px}
-    .hero{padding:100px 0 120px;background-color:#021219}
-    .container{width:100%;max-width:1200px;margin:0 auto;padding:0 24px}
-    .hero__headline{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;font-size:36px;font-weight:700;line-height:1.15;text-align:center}
-  </style>
+  <!-- Hide body until CSS is parsed — prevents any flash -->
+  <style>body{visibility:hidden}</style>
 
-  <!-- Stylesheets — async to avoid render blocking -->
-  <link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/style.css"></noscript>
-  <link rel="preload" href="css/animations.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/animations.css"></noscript>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
 </head>
 <body>
 
   <!-- SPLASH SCREEN -->
   <div id="splash" class="splash">
-    <div class="splash__inner">
-      <img src="/favicon.webp"
-           alt="Ustadi Learning"
-           class="splash__logo"
-           width="80"
-           height="80"
-           fetchpriority="high">
-      <p class="splash__tagline">Discover Brilliance</p>
-    </div>
+    <img src="/favicon.webp"
+         alt="Ustadi Learning"
+         class="splash__logo"
+         width="100"
+         height="100">
   </div>
 
   <!-- NAVBAR -->

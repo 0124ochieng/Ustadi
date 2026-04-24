@@ -2561,7 +2561,7 @@ textarea {
   justify-content: center;
   z-index: 99999;
   opacity: 1;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
 }
 
@@ -2573,37 +2573,22 @@ textarea {
   display: none;
 }
 
-.splash__inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  animation: splashReveal 0.5s ease both;
+.splash__logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(0.9);
+  animation: splashLogoIn 0.6s cubic-bezier(0.34, 1.2, 0.64, 1) 0.1s both;
 }
 
-@keyframes splashReveal {
+@keyframes splashLogoIn {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.9);
   }
   to {
     opacity: 1;
     transform: scale(1);
   }
-}
-
-.splash__logo {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-}
-
-.splash__tagline {
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 400;
-  color: rgba(239, 233, 221, 0.4);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  margin: 0;
 }
