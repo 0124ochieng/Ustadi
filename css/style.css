@@ -217,17 +217,19 @@ textarea {
   border-radius: var(--radius-btn);
   border: none;
   cursor: pointer;
-  overflow: hidden;
-  position: relative;
-  transition: transform 0.15s ease, background 0.2s ease;
+  transition: transform 0.2s ease,
+              box-shadow 0.2s ease,
+              background 0.2s ease;
 }
 
 .btn-primary:hover {
-  transform: scale(1.02);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(239, 233, 221, 0.15);
 }
 
 .btn-primary:active {
-  transform: scale(0.98);
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .btn-primary-inverse {
@@ -250,13 +252,17 @@ textarea {
   border: none;
   cursor: pointer;
   white-space: nowrap;
-  overflow: hidden;
-  position: relative;
-  transition: transform 0.15s ease;
+  transition: transform 0.2s ease,
+              box-shadow 0.2s ease;
 }
 
 .btn-nav:hover {
-  transform: scale(1.02);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(239, 233, 221, 0.12);
+}
+
+.btn-nav:active {
+  transform: translateY(0);
 }
 
 .btn-booking {
@@ -275,48 +281,18 @@ textarea {
   border-radius: var(--radius-booking-btn);
   border: none;
   cursor: pointer;
-  overflow: hidden;
-  position: relative;
-  transition: transform 0.15s ease, background 0.2s ease;
+  transition: transform 0.2s ease,
+              box-shadow 0.2s ease,
+              background 0.2s ease;
 }
 
-.btn-booking:hover {
-  transform: scale(1.02);
+.btn-booking:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(239, 233, 221, 0.12);
 }
 
-.btn-booking:active {
-  transform: scale(0.98);
-}
-
-/* ============================================================
-   BUTTON TEXT MASK ANIMATION
-   ============================================================ */
-
-.btn-text {
-  display: block;
-  position: relative;
-  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-.btn-text::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-.btn-primary:hover .btn-text,
-.btn-nav:hover .btn-text,
-.btn-booking:hover .btn-text {
-  transform: translateY(-100%);
-}
-
-/* Disable animation when submit button changes state */
-.btn-booking:disabled .btn-text,
-.btn-booking[style] .btn-text {
-  transform: none !important;
+.btn-booking:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 /* ============================================================
@@ -1544,22 +1520,14 @@ textarea {
   text-decoration: none;
   border-bottom: 1px solid rgba(255, 254, 244, 0.3);
   padding-bottom: 2px;
-  overflow: hidden;
-  transition: border-color 0.2s ease,
-              gap 0.2s ease;
-}
-
-.panel__cta .btn-text {
-  display: inline-block;
+  transition: gap 0.2s ease,
+              border-color 0.2s ease,
+              color 0.2s ease;
 }
 
 .panel__cta:hover {
-  border-color: var(--cream);
   gap: 12px;
-}
-
-.panel__cta:hover .btn-text {
-  transform: translateY(-100%);
+  border-color: rgb(239, 233, 221);
 }
 
 @media (min-width: 768px) {
