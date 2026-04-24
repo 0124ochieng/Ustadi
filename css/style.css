@@ -217,6 +217,8 @@ textarea {
   border-radius: var(--radius-btn);
   border: none;
   cursor: pointer;
+  overflow: hidden;
+  position: relative;
   transition: transform 0.15s ease, background 0.2s ease;
 }
 
@@ -248,6 +250,8 @@ textarea {
   border: none;
   cursor: pointer;
   white-space: nowrap;
+  overflow: hidden;
+  position: relative;
   transition: transform 0.15s ease;
 }
 
@@ -271,6 +275,8 @@ textarea {
   border-radius: var(--radius-booking-btn);
   border: none;
   cursor: pointer;
+  overflow: hidden;
+  position: relative;
   transition: transform 0.15s ease, background 0.2s ease;
 }
 
@@ -280,6 +286,37 @@ textarea {
 
 .btn-booking:active {
   transform: scale(0.98);
+}
+
+/* ============================================================
+   BUTTON TEXT MASK ANIMATION
+   ============================================================ */
+
+.btn-text {
+  display: block;
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.btn-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.btn-primary:hover .btn-text,
+.btn-nav:hover .btn-text,
+.btn-booking:hover .btn-text {
+  transform: translateY(-100%);
+}
+
+/* Disable animation when submit button changes state */
+.btn-booking:disabled .btn-text,
+.btn-booking[style] .btn-text {
+  transform: none !important;
 }
 
 /* ============================================================
@@ -488,9 +525,12 @@ textarea {
   right: 0;
   bottom: 0;
   width: 100%;
-  background: var(--navy);
+  background: rgba(2, 18, 25, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-left: 1px solid rgba(239, 233, 221, 0.06);
   transform: translateX(100%);
-  transition: transform 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 2000;
   padding: 24px;
   flex-direction: column;
@@ -650,27 +690,37 @@ textarea {
    ============================================================ */
 
 .mobile-menu {
-  display: flex;
+  display: none;
   flex-direction: column;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   width: 100%;
-  background: var(--navy);
+  background: rgba(2, 18, 25, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-left: 1px solid rgba(239, 233, 221, 0.06);
   transform: translateX(100%);
-  transition: transform 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 2000;
   padding: 0 var(--margin-mobile) var(--margin-mobile);
   overflow-y: auto;
-  visibility: hidden;
-  pointer-events: none;
 }
 
 .mobile-menu.open {
+  display: flex;
   transform: translateX(0);
-  visibility: visible;
-  pointer-events: auto;
+}
+
+/* Subtle dark overlay behind the glass panel */
+.mobile-menu::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 18, 25, 0.2);
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* Menu top row: logo + close button */
@@ -746,7 +796,14 @@ textarea {
   font-family: var(--font-display);
   font-size: 18px;
   font-weight: 600;
-  color: var(--white);
+  color: rgba(239, 233, 221, 0.9);
+  border-bottom: 1px solid rgba(239, 233, 221, 0.06);
+  transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.mobile-menu__links a:hover {
+  color: rgb(239, 233, 221);
+  padding-left: 8px;
 }
 
 /* Book Free Session button at bottom */
@@ -1487,13 +1544,22 @@ textarea {
   text-decoration: none;
   border-bottom: 1px solid rgba(255, 254, 244, 0.3);
   padding-bottom: 2px;
+  overflow: hidden;
   transition: border-color 0.2s ease,
               gap 0.2s ease;
+}
+
+.panel__cta .btn-text {
+  display: inline-block;
 }
 
 .panel__cta:hover {
   border-color: var(--cream);
   gap: 12px;
+}
+
+.panel__cta:hover .btn-text {
+  transform: translateY(-100%);
 }
 
 @media (min-width: 768px) {
