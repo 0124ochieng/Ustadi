@@ -286,3 +286,70 @@ document.querySelectorAll('.faq-question').forEach(question => {
 
   trustArea.addEventListener('mouseleave', () => bubbles.forEach(releaseMagnet));
 })();
+
+/* ── Section scroll indicator ── */
+(function() {
+
+  const indicator = document.getElementById('scrollIndicator');
+  if (!indicator) return;
+
+  if (window.innerWidth < 1024) return;
+
+  const dashes = indicator.querySelectorAll('.scroll-indicator__dash');
+
+  const sections = Array.from(dashes).map(dash => ({
+    dash,
+    id: dash.dataset.section,
+    el: document.getElementById(dash.dataset.section)
+  })).filter(s => s.el);
+
+  const lightSections = ['services', 'faq'];
+
+  function getActiveSection() {
+    const scrollY = window.scrollY;
+    const windowH = window.innerHeight;
+    const midpoint = scrollY + windowH * 0.45;
+
+    let active = sections[0];
+
+    sections.forEach(section => {
+      const top = section.el.getBoundingClientRect().top + scrollY;
+      if (top <= midpoint) active = section;
+    });
+
+    return active;
+  }
+
+  function updateIndicator() {
+    const active = getActiveSection();
+
+    dashes.forEach(dash => dash.classList.remove('active'));
+    if (active) active.dash.classList.add('active');
+
+    if (active && lightSections.includes(active.id)) {
+      indicator.classList.add('on-light');
+    } else {
+      indicator.classList.remove('on-light');
+    }
+  }
+
+  sections.forEach(section => {
+    section.dash.addEventListener('click', () => {
+      section.el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  window.addEventListener('scroll', updateIndicator, { passive: true });
+
+  updateIndicator();
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth < 1024) {
+      indicator.style.display = 'none';
+    } else {
+      indicator.style.display = 'flex';
+      updateIndicator();
+    }
+  });
+
+})();

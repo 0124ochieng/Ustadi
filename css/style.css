@@ -2527,3 +2527,66 @@ textarea {
   }
 }
 
+/* Scroll indicator — desktop only */
+.scroll-indicator {
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  z-index: 500;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+}
+
+@media (min-width: 1024px) {
+  .scroll-indicator {
+    display: flex;
+  }
+}
+
+.scroll-indicator__dash {
+  display: block;
+  width: 24px;
+  height: 2px;
+  border-radius: 2px;
+  border: none;
+  padding: 0;
+  background: rgba(239, 233, 221, 0.18);
+  cursor: pointer;
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.35s ease,
+              opacity 0.35s ease;
+  outline: none;
+}
+
+.scroll-indicator__dash:hover {
+  background: rgba(239, 233, 221, 0.45);
+  width: 32px;
+}
+
+.scroll-indicator__dash.active {
+  width: 36px;
+  background: rgba(239, 233, 221, 0.9);
+  box-shadow: 0 0 8px rgba(239, 233, 221, 0.4),
+              0 0 16px rgba(239, 233, 221, 0.15);
+}
+
+.scroll-indicator.on-light .scroll-indicator__dash {
+  background: rgba(2, 18, 25, 0.2);
+}
+
+.scroll-indicator.on-light .scroll-indicator__dash:hover {
+  background: rgba(2, 18, 25, 0.45);
+}
+
+.scroll-indicator.on-light .scroll-indicator__dash.active {
+  background: rgba(2, 18, 25, 0.85);
+  box-shadow: 0 0 8px rgba(2, 18, 25, 0.2);
+}
+
