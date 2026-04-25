@@ -1154,7 +1154,8 @@ textarea {
    ============================================================ */
 
 .how-it-works {
-  padding: 120px 0 160px;
+  padding: 120px 0 120px;
+  background-color: #021219;
 }
 
 .hiw__label {
@@ -1175,7 +1176,9 @@ textarea {
 .hiw__steps {
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: 48px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 /* Base step: two columns — 35% number | 65% content */
@@ -2234,7 +2237,7 @@ textarea {
   /* Section padding */
   .hero { padding: 0; }
   .why-ustadi { padding: 160px 0; }
-  .how-it-works { padding: 160px 0 200px; }
+  .how-it-works { padding: 140px 0 140px; }
   .services { padding: 160px 0; }
   .trust { padding: 160px 0 140px; }
   .faq { padding: 160px 0; }
@@ -2266,7 +2269,7 @@ textarea {
   }
 
   .hiw__steps {
-    gap: 80px;
+    gap: 64px;
   }
 
   .hiw__step {
@@ -2621,8 +2624,7 @@ textarea {
   }
 }
 
-.why-ustadi,
-.how-it-works {
+.why-ustadi {
   position: relative;
   background: #021219;
   padding: 0;
