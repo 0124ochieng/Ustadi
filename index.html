@@ -289,71 +289,132 @@
     <!-- SECTION 2: WHY USTADI -->
     <section id="why-ustadi" class="why-ustadi">
 
-      <!-- Sticky container — stays in viewport -->
-      <div class="story-sticky">
+      <!-- ── DESKTOP: Scroll storytelling ── -->
+      <div class="why-desktop-story">
 
-        <!-- Section label — always visible -->
-        <span class="label story-label" id="whyLabel">WHY USTADI LEARNING</span>
+        <div class="story-sticky">
+          <span class="label story-label">WHY USTADI LEARNING</span>
 
-        <!-- Item 1 -->
-        <div class="story-item" id="whyItem1">
-          <img src="assets/icons/fonts/shield-icon.webp"
-               alt="" class="story-item__icon"
-               aria-hidden="true" width="28" height="28">
-          <h2 class="story-item__headline">
-            Every tutor is assessed.
-            Not just hired.
-          </h2>
-          <p class="story-item__body">
-            Subject knowledge, clarity of explanation,
-            and patience — evaluated before anyone
-            meets your child.
-          </p>
+          <div class="story-item" id="whyItem1">
+            <img src="assets/icons/fonts/shield-icon.webp"
+                 alt="" class="story-item__icon"
+                 aria-hidden="true" width="28" height="28">
+            <h2 class="story-item__headline">
+              Every tutor is assessed.
+              Not just hired.
+            </h2>
+            <p class="story-item__body">
+              Subject knowledge, clarity of explanation, and patience —
+              evaluated before anyone meets your child.
+            </p>
+          </div>
+
+          <div class="story-item" id="whyItem2">
+            <img src="assets/icons/fonts/gift-box-icon.webp"
+                 alt="" class="story-item__icon"
+                 aria-hidden="true" width="28" height="28">
+            <h2 class="story-item__headline">
+              Your first session
+              costs nothing.
+            </h2>
+            <p class="story-item__body">
+              Experience the quality first.
+              Pay only when you are satisfied with what you see.
+            </p>
+          </div>
+
+          <div class="story-item" id="whyItem3">
+            <img src="assets/icons/fonts/arrow-icon.webp"
+                 alt="" class="story-item__icon"
+                 aria-hidden="true" width="28" height="28">
+            <h2 class="story-item__headline">
+              Learning happens where
+              they are comfortable.
+            </h2>
+            <p class="story-item__body">
+              At home, a quiet venue, or online from anywhere in East Africa.
+              No disruption to your routine.
+            </p>
+          </div>
+
+          <div class="story-progress" id="whyProgress">
+            <span class="story-progress__dot active" data-index="0"></span>
+            <span class="story-progress__dot" data-index="1"></span>
+            <span class="story-progress__dot" data-index="2"></span>
+          </div>
         </div>
 
-        <!-- Item 2 -->
-        <div class="story-item" id="whyItem2">
-          <img src="assets/icons/fonts/gift-box-icon.webp"
-               alt="" class="story-item__icon"
-               aria-hidden="true" width="28" height="28">
-          <h2 class="story-item__headline">
-            Your first session
-            costs nothing.
-          </h2>
-          <p class="story-item__body">
-            Experience the quality first.
-            Pay only when you are satisfied
-            with what you see.
-          </p>
-        </div>
-
-        <!-- Item 3 -->
-        <div class="story-item" id="whyItem3">
-          <img src="assets/icons/fonts/arrow-icon.webp"
-               alt="" class="story-item__icon"
-               aria-hidden="true" width="28" height="28">
-          <h2 class="story-item__headline">
-            Learning happens where
-            they are comfortable.
-          </h2>
-          <p class="story-item__body">
-            At home, a quiet venue, or online
-            from anywhere in East Africa.
-            No disruption to your routine.
-          </p>
-        </div>
-
-        <!-- Progress dots -->
-        <div class="story-progress" id="whyProgress">
-          <span class="story-progress__dot active" data-index="0"></span>
-          <span class="story-progress__dot" data-index="1"></span>
-          <span class="story-progress__dot" data-index="2"></span>
-        </div>
+        <div class="story-track" id="whyTrack" aria-hidden="true"></div>
 
       </div>
 
-      <!-- Scroll track — makes section tall -->
-      <div class="story-track" id="whyTrack" aria-hidden="true"></div>
+      <!-- ── MOBILE: Original three-point list ── -->
+      <div class="why-mobile-list">
+        <div class="container">
+
+          <div class="why__header">
+            <span class="label why__label animate">WHY USTADI LEARNING</span>
+            <h2 class="headline-section why__headline animate">
+              You already know your child is capable.
+              You just need the right environment to prove it.
+            </h2>
+          </div>
+
+          <div class="why__points">
+
+            <div class="why__point animate">
+              <img src="assets/icons/fonts/shield-icon.webp"
+                   alt="" class="why__point-icon"
+                   aria-hidden="true" width="24" height="24" loading="eager">
+              <div class="why__point-text">
+                <h3 class="why__point-title">
+                  Every tutor is assessed. Not just hired.
+                </h3>
+                <p class="why__point-body">
+                  Subject knowledge, clarity of explanation, and patience —
+                  evaluated before anyone meets your child.
+                </p>
+              </div>
+            </div>
+
+            <div class="why__point animate">
+              <img src="assets/icons/fonts/gift-box-icon.webp"
+                   alt="" class="why__point-icon"
+                   aria-hidden="true" width="24" height="24" loading="eager">
+              <div class="why__point-text">
+                <h3 class="why__point-title">
+                  Your first session costs nothing.
+                </h3>
+                <p class="why__point-body">
+                  Experience the quality first.
+                  Pay only when you are satisfied with what you see.
+                </p>
+              </div>
+            </div>
+
+            <div class="why__point animate">
+              <img src="assets/icons/fonts/arrow-icon.webp"
+                   alt="" class="why__point-icon"
+                   aria-hidden="true" width="24" height="24" loading="eager">
+              <div class="why__point-text">
+                <h3 class="why__point-title">
+                  Learning happens where they are comfortable.
+                </h3>
+                <p class="why__point-body">
+                  At home, a quiet venue, or online from anywhere in East Africa.
+                  No disruption to your routine.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="why__note animate">
+            <p class="why__note-text">The way it works is simpler than you think.</p>
+          </div>
+
+        </div>
+      </div>
 
     </section>
 

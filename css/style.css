@@ -1154,7 +1154,7 @@ textarea {
    ============================================================ */
 
 .how-it-works {
-  padding: 120px 0;
+  padding: 120px 0 160px;
 }
 
 .hiw__label {
@@ -1175,7 +1175,7 @@ textarea {
 .hiw__steps {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 64px;
 }
 
 /* Base step: two columns — 35% number | 65% content */
@@ -2234,7 +2234,7 @@ textarea {
   /* Section padding */
   .hero { padding: 0; }
   .why-ustadi { padding: 160px 0; }
-  .how-it-works { padding: 160px 0; }
+  .how-it-works { padding: 160px 0 200px; }
   .services { padding: 160px 0; }
   .trust { padding: 160px 0 140px; }
   .faq { padding: 160px 0; }
@@ -2601,6 +2601,25 @@ textarea {
 }
 
 /* ── Scroll storytelling sections ── */
+
+/* Why Ustadi — dual layout wrappers */
+.why-desktop-story {
+  display: none;
+}
+
+.why-mobile-list {
+  display: block;
+  padding: 80px 0 100px;
+}
+
+@media (min-width: 1024px) {
+  .why-desktop-story {
+    display: block;
+  }
+  .why-mobile-list {
+    display: none;
+  }
+}
 
 .why-ustadi,
 .how-it-works {

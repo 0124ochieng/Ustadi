@@ -290,81 +290,94 @@ document.querySelectorAll('.faq-question').forEach(question => {
 /* ── Scroll storytelling engine ── */
 (function() {
 
-  const storySections = [
-    {
-      section: document.getElementById('why-ustadi'),
-      track: document.getElementById('whyTrack'),
-      items: [
-        document.getElementById('whyItem1'),
-        document.getElementById('whyItem2'),
-        document.getElementById('whyItem3')
-      ],
-      progress: document.getElementById('whyProgress')
+  let initialized = false;
+
+  function init() {
+    if (window.innerWidth >= 1024 && !initialized) {
+      initialized = true;
+      runStoryEngine();
     }
-  ].filter(s => s.section && s.track);
-
-  if (!storySections.length) return;
-
-  const STEP_HEIGHT = 0.6;
-
-  function setHeights() {
-    storySections.forEach(s => {
-      const count = s.items.filter(Boolean).length;
-      const totalVH = 0.5 + (count * STEP_HEIGHT) + 0.5;
-      const totalH = totalVH * window.innerHeight;
-      s.track.style.height = (totalH - window.innerHeight) + 'px';
-    });
   }
 
-  function getActiveIndex(s) {
-    const rect = s.section.getBoundingClientRect();
-    const scrolled = -rect.top;
-    const count = s.items.filter(Boolean).length;
-    const trackH = parseFloat(s.track.style.height || 0);
+  window.addEventListener('resize', init, { passive: true });
+  init();
 
-    if (scrolled < 0) return -1;
-    if (scrolled > trackH) return count;
+  function runStoryEngine() {
 
-    const progress = scrolled / trackH;
-    const index = Math.floor(progress * count);
-    return Math.min(index, count - 1);
-  }
-
-  function updateSection(s) {
-    const activeIndex = getActiveIndex(s);
-    const dots = s.progress
-      ? s.progress.querySelectorAll('.story-progress__dot')
-      : [];
-
-    s.items.forEach((item, i) => {
-      if (!item) return;
-      if (i === activeIndex) {
-        item.classList.remove('exit-up');
-        item.classList.add('visible');
-      } else if (i < activeIndex) {
-        item.classList.remove('visible');
-        item.classList.add('exit-up');
-      } else {
-        item.classList.remove('visible', 'exit-up');
+    const storySections = [
+      {
+        section: document.getElementById('why-ustadi'),
+        track: document.getElementById('whyTrack'),
+        items: [
+          document.getElementById('whyItem1'),
+          document.getElementById('whyItem2'),
+          document.getElementById('whyItem3')
+        ],
+        progress: document.getElementById('whyProgress')
       }
-    });
+    ].filter(s => s.section && s.track && s.items.every(Boolean));
 
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === activeIndex);
-    });
-  }
+    if (!storySections.length) return;
 
-  setHeights();
-  storySections.forEach(updateSection);
+    const STEP_HEIGHT = 0.6;
 
-  window.addEventListener('scroll', () => {
-    storySections.forEach(updateSection);
-  }, { passive: true });
+    function setHeights() {
+      storySections.forEach(s => {
+        const count = s.items.length;
+        const totalH = (0.5 + (count * STEP_HEIGHT) + 0.5) * window.innerHeight;
+        s.track.style.height = (totalH - window.innerHeight) + 'px';
+      });
+    }
 
-  window.addEventListener('resize', () => {
+    function getActiveIndex(s) {
+      const rect = s.section.getBoundingClientRect();
+      const scrolled = -rect.top;
+      const trackH = parseFloat(s.track.style.height || 0);
+      const count = s.items.length;
+
+      if (scrolled < 0) return -1;
+      if (scrolled > trackH) return count;
+
+      const progress = scrolled / trackH;
+      return Math.min(Math.floor(progress * count), count - 1);
+    }
+
+    function updateSection(s) {
+      const activeIndex = getActiveIndex(s);
+      const dots = s.progress
+        ? s.progress.querySelectorAll('.story-progress__dot')
+        : [];
+
+      s.items.forEach((item, i) => {
+        if (i === activeIndex) {
+          item.classList.remove('exit-up');
+          item.classList.add('visible');
+        } else if (i < activeIndex) {
+          item.classList.remove('visible');
+          item.classList.add('exit-up');
+        } else {
+          item.classList.remove('visible', 'exit-up');
+        }
+      });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === activeIndex);
+      });
+    }
+
     setHeights();
     storySections.forEach(updateSection);
-  }, { passive: true });
+
+    window.addEventListener('scroll', () => {
+      storySections.forEach(updateSection);
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+      setHeights();
+      storySections.forEach(updateSection);
+    }, { passive: true });
+
+  }
 
 })();
 
