@@ -287,6 +287,97 @@ document.querySelectorAll('.faq-question').forEach(question => {
   trustArea.addEventListener('mouseleave', () => bubbles.forEach(releaseMagnet));
 })();
 
+/* ── Scroll storytelling engine ── */
+(function() {
+
+  const storySections = [
+    {
+      section: document.getElementById('why-ustadi'),
+      track: document.getElementById('whyTrack'),
+      items: [
+        document.getElementById('whyItem1'),
+        document.getElementById('whyItem2'),
+        document.getElementById('whyItem3')
+      ],
+      progress: document.getElementById('whyProgress')
+    },
+    {
+      section: document.getElementById('how-it-works'),
+      track: document.getElementById('hiwTrack'),
+      items: [
+        document.getElementById('hiwItem1'),
+        document.getElementById('hiwItem2'),
+        document.getElementById('hiwItem3')
+      ],
+      progress: document.getElementById('hiwProgress')
+    }
+  ].filter(s => s.section && s.track);
+
+  if (!storySections.length) return;
+
+  const STEP_HEIGHT = 1.2;
+
+  function setHeights() {
+    storySections.forEach(s => {
+      const count = s.items.filter(Boolean).length;
+      const totalVH = 0.5 + (count * STEP_HEIGHT) + 0.5;
+      const totalH = totalVH * window.innerHeight;
+      s.track.style.height = (totalH - window.innerHeight) + 'px';
+    });
+  }
+
+  function getActiveIndex(s) {
+    const rect = s.section.getBoundingClientRect();
+    const scrolled = -rect.top;
+    const count = s.items.filter(Boolean).length;
+    const trackH = parseFloat(s.track.style.height || 0);
+
+    if (scrolled < 0) return -1;
+    if (scrolled > trackH) return count;
+
+    const progress = scrolled / trackH;
+    const index = Math.floor(progress * count);
+    return Math.min(index, count - 1);
+  }
+
+  function updateSection(s) {
+    const activeIndex = getActiveIndex(s);
+    const dots = s.progress
+      ? s.progress.querySelectorAll('.story-progress__dot')
+      : [];
+
+    s.items.forEach((item, i) => {
+      if (!item) return;
+      if (i === activeIndex) {
+        item.classList.remove('exit-up');
+        item.classList.add('visible');
+      } else if (i < activeIndex) {
+        item.classList.remove('visible');
+        item.classList.add('exit-up');
+      } else {
+        item.classList.remove('visible', 'exit-up');
+      }
+    });
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === activeIndex);
+    });
+  }
+
+  setHeights();
+  storySections.forEach(updateSection);
+
+  window.addEventListener('scroll', () => {
+    storySections.forEach(updateSection);
+  }, { passive: true });
+
+  window.addEventListener('resize', () => {
+    setHeights();
+    storySections.forEach(updateSection);
+  }, { passive: true });
+
+})();
+
 /* ── Section scroll indicator ── */
 (function() {
 
