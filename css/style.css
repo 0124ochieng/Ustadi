@@ -798,9 +798,9 @@ textarea {
 .hero__image-scene {
   position: relative;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1040px;
   margin: 48px auto 0;
-  padding: 0 24px;
+  padding: 0;
   overflow: visible;
 }
 
@@ -854,13 +854,13 @@ textarea {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1040px;
   margin: 0 auto;
 }
 
 .hero__fg-img {
   width: 100%;
-  max-width: 1300px;
+  max-width: 1040px;
   height: auto;
   border-radius: 16px;
   display: block;
@@ -895,10 +895,10 @@ textarea {
   }
 }
 
-@media (min-width: 1300px) {
+@media (min-width: 1040px) {
   .hero__image-scene {
     padding: 0;
-    max-width: 1300px;
+    max-width: 1040px;
   }
 }
 
