@@ -41,6 +41,10 @@
   <link rel="shortcut icon" href="/favicon.webp?v=3">
   <link rel="apple-touch-icon" href="/favicon.webp?v=3">
   <link rel="manifest" href="manifest.json">
+  <link rel="preload"
+        as="image"
+        href="assets/images/hero-image.webp"
+        fetchpriority="high">
   <meta name="theme-color" content="#021219">
   <meta name="msapplication-TileImage" content="/favicon.webp">
 
@@ -185,6 +189,11 @@
 </head>
 <body>
 
+  <canvas id="particleCanvas"
+          aria-hidden="true"
+          class="particle-canvas">
+  </canvas>
+
   <!-- NAVBAR -->
   <header class="navbar">
     <nav class="navbar__inner" aria-label="Main navigation">
@@ -280,6 +289,17 @@
             <p class="caption hero__trust">
               No commitment. No payment. Just results.
             </p>
+          </div>
+
+          <div class="hero__image-wrap animate">
+            <img src="assets/images/hero-image.webp"
+                 alt="Ustadi Learning — Expert tutoring in Mathematics, Sciences and Computer Studies"
+                 class="hero__img"
+                 width="1040"
+                 height="600"
+                 loading="eager"
+                 fetchpriority="high"
+                 decoding="async">
           </div>
 
         </div>

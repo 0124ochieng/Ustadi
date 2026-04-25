@@ -447,3 +447,82 @@ document.querySelectorAll('.faq-question').forEach(question => {
   });
 
 })();
+
+/* ── Floating particle specs ── */
+(function() {
+
+  const canvas = document.getElementById('particleCanvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  const PARTICLE_COUNT = 60;
+  const particles = [];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function random(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  function createParticle() {
+    return {
+      x: random(0, canvas.width),
+      y: random(0, canvas.height),
+      vx: random(-0.12, 0.12),
+      vy: random(-0.12, 0.12),
+      size: 1,
+      opacity: random(0.15, 0.5),
+      pulse: random(0, Math.PI * 2),
+      pulseSpeed: random(0.003, 0.008)
+    };
+  }
+
+  resize();
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    particles.push(createParticle());
+  }
+
+  let animId;
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(p => {
+      p.pulse += p.pulseSpeed;
+      const pulsedOpacity = p.opacity + Math.sin(p.pulse) * 0.08;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(239, 233, 221, ${pulsedOpacity})`;
+      ctx.fill();
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < -2) p.x = canvas.width + 2;
+      if (p.x > canvas.width + 2) p.x = -2;
+      if (p.y < -2) p.y = canvas.height + 2;
+      if (p.y > canvas.height + 2) p.y = -2;
+    });
+
+    animId = requestAnimationFrame(draw);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      cancelAnimationFrame(animId);
+    } else {
+      draw();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    resize();
+  }, { passive: true });
+
+  draw();
+
+})();
