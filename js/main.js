@@ -300,22 +300,12 @@ document.querySelectorAll('.faq-question').forEach(question => {
         document.getElementById('whyItem3')
       ],
       progress: document.getElementById('whyProgress')
-    },
-    {
-      section: document.getElementById('how-it-works'),
-      track: document.getElementById('hiwTrack'),
-      items: [
-        document.getElementById('hiwItem1'),
-        document.getElementById('hiwItem2'),
-        document.getElementById('hiwItem3')
-      ],
-      progress: document.getElementById('hiwProgress')
     }
   ].filter(s => s.section && s.track);
 
   if (!storySections.length) return;
 
-  const STEP_HEIGHT = 1.2;
+  const STEP_HEIGHT = 0.6;
 
   function setHeights() {
     storySections.forEach(s => {

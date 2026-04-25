@@ -821,8 +821,18 @@ textarea {
    ============================================================ */
 
 .hero {
-  padding: 100px 0 120px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0;
   background-color: #021219;
+  overflow: hidden;
+}
+
+.hero .container {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  width: 100%;
 }
 
 .hero__content {
@@ -2222,7 +2232,7 @@ textarea {
   }
 
   /* Section padding */
-  .hero { padding: 140px 0 160px; }
+  .hero { padding: 0; }
   .why-ustadi { padding: 160px 0; }
   .how-it-works { padding: 160px 0; }
   .services { padding: 160px 0; }
@@ -2608,7 +2618,7 @@ textarea {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 80px 24px;
+  padding: 60px 24px 80px;
   overflow: hidden;
   pointer-events: none;
 }
@@ -2619,12 +2629,14 @@ textarea {
 
 .story-label {
   position: absolute;
-  top: 80px;
+  top: 40px;
   left: 50%;
   transform: translateX(-50%);
   color: #c9bfa8;
   white-space: nowrap;
-  opacity: 0.6;
+  opacity: 0.5;
+  font-size: 11px;
+  letter-spacing: 0.12em;
   pointer-events: none;
 }
 

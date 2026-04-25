@@ -199,12 +199,9 @@
 
       <!-- Desktop nav links (hidden on mobile) -->
       <ul class="navbar__links" role="list">
-        <li><a href="#services" class="navbar__link">Services</a></li>
-        <li><a href="#why-ustadi" class="navbar__link">Why Ustadi</a></li>
-        <li><a href="#how-it-works" class="navbar__link">How It Works</a></li>
-        <li><a href="#faq" class="navbar__link">FAQ</a></li>
+        <li><a href="/" class="navbar__link">Home</a></li>
         <li><a href="/resources" class="navbar__link">Resources</a></li>
-        <li><a href="#booking-form" class="navbar__link">Contact</a></li>
+        <li><a href="/about" class="navbar__link">About</a></li>
       </ul>
 
       <!-- Desktop CTA (hidden on mobile) -->
@@ -243,12 +240,9 @@
 
     <nav aria-label="Mobile navigation links">
       <ul class="mobile-menu__links" role="list">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#why-ustadi">Why Ustadi</a></li>
-        <li><a href="#how-it-works">How It Works</a></li>
-        <li><a href="#faq">FAQ</a></li>
+        <li><a href="/">Home</a></li>
         <li><a href="/resources">Resources</a></li>
-        <li><a href="#booking-form">Contact</a></li>
+        <li><a href="/about">About</a></li>
       </ul>
     </nav>
 
@@ -365,60 +359,76 @@
 
     <!-- SECTION 3: HOW IT WORKS -->
     <section id="how-it-works" class="how-it-works">
+      <div class="container">
 
-      <div class="story-sticky">
+        <span class="label hiw__label animate">HOW IT WORKS</span>
+        <h2 class="headline-section hiw__headline animate">Starting is simple</h2>
+        <p class="sub-headline hiw__sub animate">
+          Three steps between you and your child's first session.
+        </p>
 
-        <span class="label story-label" id="hiwLabel">HOW IT WORKS</span>
+        <div class="hiw__steps">
 
-        <!-- Step 1 -->
-        <div class="story-item" id="hiwItem1">
-          <span class="story-item__number">01</span>
-          <h2 class="story-item__headline">
-            Fill the booking form.
-          </h2>
-          <p class="story-item__body">
-            Tell us your child's name, level,
-            subject, and preferred time.
-            It takes less than 60 seconds.
-          </p>
-        </div>
+          <div class="hiw__step hiw__step--right animate">
+            <div class="hiw__number-col">
+              <span class="hiw__number">01</span>
+            </div>
+            <div class="hiw__content-col">
+              <div class="hiw__circle-wrap">
+                <img src="assets/images/image-2.webp"
+                     alt="Parent filling booking form"
+                     class="hiw__circle-img"
+                     loading="eager" fetchpriority="high"
+                     width="80" height="80">
+              </div>
+              <h3 class="hiw__step-title">Fill the booking form</h3>
+              <p class="hiw__step-body">
+                Tell us your child's name, level, subject, and preferred time.
+                It takes less than 60 seconds.
+              </p>
+            </div>
+          </div>
 
-        <!-- Step 2 -->
-        <div class="story-item" id="hiwItem2">
-          <span class="story-item__number">02</span>
-          <h2 class="story-item__headline">
-            We find the right tutor.
-          </h2>
-          <p class="story-item__body">
-            We match your child with a tutor
-            based on their subject, level,
-            and specific learning needs.
-          </p>
-        </div>
+          <div class="hiw__step hiw__step--left animate">
+            <div class="hiw__content-col">
+              <div class="hiw__circle-wrap">
+                <img src="assets/images/image-3.webp"
+                     alt="Tutor being matched"
+                     class="hiw__circle-img"
+                     loading="lazy" width="80" height="80">
+              </div>
+              <h3 class="hiw__step-title">We find the right tutor</h3>
+              <p class="hiw__step-body">
+                We match your child with a tutor based on their subject,
+                level, and specific learning needs.
+              </p>
+            </div>
+            <div class="hiw__number-col hiw__number-col--right">
+              <span class="hiw__number">02</span>
+            </div>
+          </div>
 
-        <!-- Step 3 -->
-        <div class="story-item" id="hiwItem3">
-          <span class="story-item__number">03</span>
-          <h2 class="story-item__headline">
-            First session. Free.
-          </h2>
-          <p class="story-item__body">
-            Your tutor shows up online or
-            in-person and the learning begins.
-          </p>
-        </div>
+          <div class="hiw__step hiw__step--right animate">
+            <div class="hiw__number-col">
+              <span class="hiw__number">03</span>
+            </div>
+            <div class="hiw__content-col">
+              <div class="hiw__circle-wrap">
+                <img src="assets/images/image-4.webp"
+                     alt="Child learning with tutor"
+                     class="hiw__circle-img"
+                     loading="lazy" width="80" height="80">
+              </div>
+              <h3 class="hiw__step-title">First session. Free.</h3>
+              <p class="hiw__step-body">
+                Your tutor shows up online or in-person and the learning begins.
+              </p>
+            </div>
+          </div>
 
-        <!-- Progress dots -->
-        <div class="story-progress" id="hiwProgress">
-          <span class="story-progress__dot active" data-index="0"></span>
-          <span class="story-progress__dot" data-index="1"></span>
-          <span class="story-progress__dot" data-index="2"></span>
         </div>
 
       </div>
-
-      <div class="story-track" id="hiwTrack" aria-hidden="true"></div>
-
     </section>
 
     <!-- SECTION 4: SERVICES -->
