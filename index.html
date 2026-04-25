@@ -295,39 +295,40 @@
             </p>
           </div>
 
-          <div class="hero__image-scene animate">
-
-            <!-- Layer 1: Background image — beneath -->
-            <!-- Wider, transparent, fades bottom to top -->
-            <div class="hero__bg-image-wrap">
-              <img src="assets/images/background-image.webp"
-                   alt=""
-                   class="hero__bg-img"
-                   aria-hidden="true"
-                   width="1400"
-                   height="800"
-                   loading="eager"
-                   fetchpriority="low"
-                   decoding="async">
-            </div>
-
-            <!-- Layer 2: Hero image — on top -->
-            <!-- Scaled 25% larger than original -->
-            <div class="hero__fg-image-wrap">
-              <img src="assets/images/hero-image.webp"
-                   alt="Ustadi Learning — Expert tutoring in Mathematics, Sciences and Computer Studies across Eldoret and East Africa"
-                   class="hero__fg-img"
-                   width="1300"
-                   height="731"
-                   loading="eager"
-                   fetchpriority="high"
-                   decoding="async">
-            </div>
-
-          </div>
-
         </div>
       </div>
+
+      <!-- Image scene outside container — reaches full 1300px width -->
+      <div class="hero__image-scene animate">
+
+        <!-- Layer 1: Background image — beneath -->
+        <!-- Wider, bottom-aligned with hero image, fades top to bottom -->
+        <div class="hero__bg-image-wrap">
+          <img src="assets/images/background-image.webp"
+               alt=""
+               class="hero__bg-img"
+               aria-hidden="true"
+               width="1400"
+               height="800"
+               loading="eager"
+               fetchpriority="low"
+               decoding="async">
+        </div>
+
+        <!-- Layer 2: Hero image — on top, max-width 1300px -->
+        <div class="hero__fg-image-wrap">
+          <img src="assets/images/hero-image.webp"
+               alt="Ustadi Learning — Expert tutoring in Mathematics, Sciences and Computer Studies across Eldoret and East Africa"
+               class="hero__fg-img"
+               width="1300"
+               height="731"
+               loading="eager"
+               fetchpriority="high"
+               decoding="async">
+        </div>
+
+      </div>
+
     </section>
 
     <!-- SECTION 2: WHY USTADI -->

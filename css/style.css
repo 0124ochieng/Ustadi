@@ -794,20 +794,23 @@ textarea {
 
 /* ── Hero image scene ── */
 
+/* Outside container — own centering + padding */
 .hero__image-scene {
   position: relative;
   width: 100%;
   max-width: 1300px;
   margin: 48px auto 0;
-  padding: 0 var(--margin-mobile);
+  padding: 0 24px;
   overflow: visible;
 }
 
 /* ── LAYER 1: Background image ── */
 
+/* Bottom-aligned with hero image — extends upward */
 .hero__bg-image-wrap {
   position: absolute;
-  top: -72px;
+  bottom: 0;
+  top: auto;
   left: 50%;
   transform: translateX(-50%);
   width: 1400px;
@@ -819,23 +822,30 @@ textarea {
   width: 100%;
   height: auto;
   display: block;
-  opacity: 1;
   -webkit-mask-image: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 0, 0, 0.35) 20%,
-    rgba(0, 0, 0, 0.25) 50%,
-    rgba(0, 0, 0, 0.1) 75%,
+    rgba(0, 0, 0, 0.38) 10%,
+    rgba(0, 0, 0, 0.32) 25%,
+    rgba(0, 0, 0, 0.22) 45%,
+    rgba(0, 0, 0, 0.12) 65%,
+    rgba(0, 0, 0, 0.04) 85%,
     rgba(0, 0, 0, 0) 100%
   );
   mask-image: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 0, 0, 0.35) 20%,
-    rgba(0, 0, 0, 0.25) 50%,
-    rgba(0, 0, 0, 0.1) 75%,
+    rgba(0, 0, 0, 0.38) 10%,
+    rgba(0, 0, 0, 0.32) 25%,
+    rgba(0, 0, 0, 0.22) 45%,
+    rgba(0, 0, 0, 0.12) 65%,
+    rgba(0, 0, 0, 0.04) 85%,
     rgba(0, 0, 0, 0) 100%
   );
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 
 /* ── LAYER 2: Hero image (foreground) ── */
@@ -844,10 +854,13 @@ textarea {
   position: relative;
   z-index: 2;
   width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
 .hero__fg-img {
   width: 100%;
+  max-width: 1300px;
   height: auto;
   border-radius: 16px;
   display: block;
@@ -857,16 +870,22 @@ textarea {
 
 @media (max-width: 767px) {
   .hero__bg-image-wrap {
-    width: 120%;
+    width: 110%;
     left: 50%;
     transform: translateX(-50%);
-    top: -40px;
+    bottom: 0;
   }
 }
 
 @media (min-width: 768px) {
   .hero__image-scene {
-    padding: 0 var(--margin-tablet);
+    padding: 0 40px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1299px) {
+  .hero__bg-image-wrap {
+    width: 1400px;
   }
 }
 
@@ -874,14 +893,11 @@ textarea {
   .hero__image-scene {
     margin-top: 64px;
   }
-  .hero__bg-image-wrap {
-    top: -72px;
-  }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1300px) {
   .hero__image-scene {
-    padding: 0 var(--margin-desktop);
+    padding: 0;
     max-width: 1300px;
   }
 }
