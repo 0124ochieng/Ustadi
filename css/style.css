@@ -687,15 +687,14 @@ textarea {
    ============================================================ */
 
 .hero {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding-top: 120px;
-  padding-bottom: 120px;
+  padding-top: 100px;
+  padding-bottom: 80px;
   background-color: #021219;
   overflow: hidden;
+  width: 100%;
 }
 
 .hero .container {
@@ -705,9 +704,11 @@ textarea {
 }
 
 .hero__content {
-  max-width: 680px;
-  text-align: center;
+  width: 100%;
+  max-width: 760px;
   margin: 0 auto;
+  text-align: center;
+  flex-shrink: 0;
 }
 
 .hero__label {
@@ -747,7 +748,7 @@ textarea {
 
 .hero__sub {
   color: #c9bfa8;
-  margin-bottom: 40px;
+  margin-bottom: 0;
   max-width: 520px;
   margin-left: auto;
   margin-right: auto;
@@ -758,8 +759,9 @@ textarea {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 16px;
+  margin-top: 40px;
+  flex-shrink: 0;
   animation: fadeUp 0.6s ease 0.45s both;
 }
 
@@ -780,14 +782,11 @@ textarea {
     font-size: 52px;
   }
   .hero {
-    padding-top: 140px;
-    padding-bottom: 140px;
+    padding-top: 120px;
+    padding-bottom: 100px;
   }
   .hero .container {
     padding-top: 0;
-  }
-  .hero__image-scene {
-    margin-top: 160px;
   }
 }
 
@@ -808,8 +807,9 @@ textarea {
   position: relative;
   width: calc(100% - 48px);
   max-width: 1040px;
-  margin: 64px auto 0;
+  margin: 80px auto 0;
   overflow: visible;
+  flex-shrink: 0;
 }
 
 /* ── LAYER 1: Background image ── */
@@ -822,7 +822,6 @@ textarea {
   transform: translateX(-50%);
   z-index: 1;
   pointer-events: none;
-  display: block;
 }
 
 @media (max-width: 1023px) {
@@ -878,21 +877,27 @@ textarea {
 @media (min-width: 768px) {
   .hero__image-scene {
     width: calc(100% - 80px);
-    max-width: 1040px;
-    margin-top: 72px;
+    margin-top: 80px;
   }
 }
 
 /* Desktop */
 @media (min-width: 1024px) {
   .hero {
-    padding-top: 160px;
-    padding-bottom: 80px;
+    padding-top: 140px;
+    padding-bottom: 120px;
   }
   .hero__image-scene {
     width: calc(100% - 160px);
     max-width: 1040px;
-    margin-top: 80px;
+    margin-top: 96px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .hero__image-scene {
+    width: 1040px;
+    padding: 0;
   }
 }
 
@@ -2207,7 +2212,6 @@ textarea {
   }
 
   /* Section padding */
-  .hero { padding-top: 120px; }
   .why-ustadi { padding: 160px 0; }
   .how-it-works { padding: 140px 0 140px; }
   .services { padding: 160px 0; }
