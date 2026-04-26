@@ -525,4 +525,28 @@ document.querySelectorAll('.faq-question').forEach(question => {
 
   draw();
 
+/* ── Why Ustadi sticky label ── */
+(function() {
+  if (window.innerWidth < 1024) return;
+
+  const label = document.getElementById('whyLabel');
+  const section = document.getElementById('why-ustadi');
+  if (!label || !section) return;
+
+  const labelObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          label.classList.add('label-visible');
+        } else {
+          label.classList.remove('label-visible');
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  labelObserver.observe(section);
+})();
+
 })();

@@ -47,6 +47,11 @@
         fetchpriority="high">
   <link rel="preload"
         as="image"
+        href="assets/images/mobile-hero-image.webp"
+        media="(max-width: 1023px)"
+        fetchpriority="high">
+  <link rel="preload"
+        as="image"
         href="assets/images/background-image.webp"
         fetchpriority="low">
   <meta name="theme-color" content="#021219">
@@ -210,15 +215,15 @@
              loading="eager">
       </a>
 
-      <!-- Desktop nav links (hidden on mobile) -->
-      <ul class="navbar__links" role="list">
-        <li><a href="/" class="navbar__link">Home</a></li>
-        <li><a href="/resources" class="navbar__link">Resources</a></li>
-        <li><a href="/about" class="navbar__link">About</a></li>
-      </ul>
-
-      <!-- Desktop CTA (hidden on mobile) -->
-      <a href="#booking-form" class="btn-nav navbar__cta">Book Free Session</a>
+      <!-- Right group — links + button together (hidden on mobile) -->
+      <div class="navbar__right">
+        <ul class="navbar__links" role="list">
+          <li><a href="/" class="navbar__link">Home</a></li>
+          <li><a href="/resources" class="navbar__link">Resources</a></li>
+          <li><a href="/about" class="navbar__link">About</a></li>
+        </ul>
+        <a href="#booking-form" class="btn-nav">Book Free Session</a>
+      </div>
 
       <!-- Hamburger (mobile only) — pure CSS, no icon dependency -->
       <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
@@ -315,16 +320,24 @@
                decoding="async">
         </div>
 
-        <!-- Layer 2: Hero image — on top, max-width 1300px -->
+        <!-- Layer 2: Hero image — on top, max-width 1040px -->
         <div class="hero__fg-image-wrap">
-          <img src="assets/images/hero-image.webp"
-               alt="Ustadi Learning — Expert tutoring in Mathematics, Sciences and Computer Studies across Eldoret and East Africa"
-               class="hero__fg-img"
-               width="1300"
-               height="731"
-               loading="eager"
-               fetchpriority="high"
-               decoding="async">
+          <picture>
+            <source
+              media="(max-width: 1023px)"
+              srcset="assets/images/mobile-hero-image.webp">
+            <source
+              media="(min-width: 1024px)"
+              srcset="assets/images/hero-image.webp">
+            <img src="assets/images/hero-image.webp"
+                 alt="Ustadi Learning — Expert tutoring in Mathematics, Sciences and Computer Studies"
+                 class="hero__fg-img"
+                 width="1040"
+                 height="600"
+                 loading="eager"
+                 fetchpriority="high"
+                 decoding="async">
+          </picture>
         </div>
 
       </div>
@@ -338,10 +351,10 @@
       <div class="why-desktop-story">
 
         <div class="story-sticky">
-          <span class="label story-label">WHY USTADI LEARNING</span>
+          <span id="whyLabel" class="label story-label">WHY USTADI LEARNING</span>
 
           <div class="story-item" id="whyItem1">
-            <img src="assets/icons/fonts/shield-icon.webp"
+            <img src="assets/icons/fonts/chechmark.webp"
                  alt="" class="story-item__icon"
                  aria-hidden="true" width="28" height="28">
             <h2 class="story-item__headline">
@@ -408,7 +421,7 @@
           <div class="why__points">
 
             <div class="why__point animate">
-              <img src="assets/icons/fonts/shield-icon.webp"
+              <img src="assets/icons/fonts/chechmark.webp"
                    alt="" class="why__point-icon"
                    aria-hidden="true" width="24" height="24" loading="eager">
               <div class="why__point-text">
@@ -923,8 +936,11 @@
 
             <a href="tel:+254114628443"
                class="faq__contact-item">
-              <div class="faq__contact-icon">
-                <i class="ph ph-phone"></i>
+              <div class="faq__contact-icon-wrap">
+                <img src="assets/icons/fonts/call-icon.webp"
+                     alt="Call"
+                     class="faq__contact-custom-icon"
+                     width="24" height="24">
               </div>
               <div>
                 <span class="faq__contact-type">
@@ -942,9 +958,11 @@
                target="_blank"
                rel="noopener noreferrer"
                class="faq__contact-item">
-              <div class="faq__contact-icon
-                          faq__contact-icon--wa">
-                <i class="ph ph-whatsapp-logo"></i>
+              <div class="faq__contact-icon-wrap">
+                <img src="assets/icons/fonts/green-wa-icon.webp"
+                     alt="WhatsApp"
+                     class="faq__contact-custom-icon"
+                     width="24" height="24">
               </div>
               <div>
                 <span class="faq__contact-type">
