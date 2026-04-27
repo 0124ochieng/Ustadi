@@ -1,0 +1,36 @@
+# Netlify _headers — Cache-Control for Cloudflare CDN
+
+# HTML — always revalidate so updates are instant
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+# CSS and JS — long cache (1 year), versioned via query strings in HTML
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# All images and icons — 1 year cache
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Root-level static files
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+/favicon.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+# Manifest and sitemap — 1 day
+/manifest.json
+  Cache-Control: public, max-age=86400
+
+/sitemap.xml
+  Cache-Control: public, max-age=86400
+
+/robots.txt
+  Cache-Control: public, max-age=86400

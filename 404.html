@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found — Ustadi Learning</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .error-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 24px;
+      background: #1f2a2e;
+    }
+    .error-code {
+      font-family: var(--font-display);
+      font-size: 120px;
+      font-weight: 700;
+      color: rgba(239,233,221,0.06);
+      line-height: 1;
+      margin-bottom: 0;
+    }
+    .error-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 600;
+      color: rgb(239,233,221);
+      margin-bottom: 16px;
+    }
+    .error-body {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: #c9bfa8;
+      margin-bottom: 40px;
+      max-width: 400px;
+    }
+    .error-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 52px;
+      padding: 0 36px;
+      background: rgb(239,233,221);
+      color: #1f2a2e;
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 8px;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="error-page">
+    <p class="error-code">404</p>
+    <h1 class="error-title">
+      This page does not exist.
+    </h1>
+    <p class="error-body">
+      The page you are looking for may have moved
+      or never existed. Let us take you back.
+    </p>
+    <a href="/" class="error-btn">
+      Back to Ustadi Learning
+    </a>
+  </div>
+</body>
+</html>
