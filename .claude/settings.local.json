@@ -12,7 +12,9 @@
       "Bash(git stash *)",
       "Bash(python3 -c ' *)",
       "Bash(grep -E \"hero|z-index: [12]$\")",
-      "Bash(awk -F: '$3 ~ /z-index: [12];?$/')"
+      "Bash(awk -F: '$3 ~ /z-index: [12];?$/')",
+      "Bash(ls *.webp)",
+      "Bash(ls *.ico)"
     ]
   }
 }
